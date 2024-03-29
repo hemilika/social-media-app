@@ -1,13 +1,24 @@
-import { Stack } from "@mui/material";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./layout/navbar/Navbar";
 import HomePage from "./pages/HomePage";
+import ConnectionsPage from "./pages/ConnectionsPage";
 import "./pageStyle.css";
+import ForumsPage from "./pages/ForumsPage";
+import MyAccountPage from "./pages/MyAccountPage";
+
 const App = () => {
   return (
-    <Stack direction="column" spacing={5}>
+    <Router>
       <Navbar />
-      <HomePage />
-    </Stack>
+      <Routes>
+        <Route path="/" element={<Navbar />}>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/connections" element={<ConnectionsPage />} />
+          <Route path="/forums" element={<ForumsPage />} />
+          <Route path="/account" element={<MyAccountPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 };
 

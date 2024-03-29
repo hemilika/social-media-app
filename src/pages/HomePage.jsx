@@ -6,7 +6,7 @@ import AddPost from "../layout/page-content/AddPost";
 
 const HomePage = () => {
   return (
-    <Grid container style={{ position: "relative", marginTop: "3%" }}>
+    <Grid container style={{ position: "relative" }}>
       <Grid
         item
         xs={3}

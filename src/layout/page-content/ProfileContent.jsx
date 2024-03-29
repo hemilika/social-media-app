@@ -8,14 +8,13 @@ import {
   Divider,
   Stack,
 } from "@mui/material";
-import { People } from "@mui/icons-material";
 import panda from "../../../public/panda.webp";
 const ProfileContent = () => {
   return (
     <Card>
       <CardHeader
         avatar={
-          <Avatar>
+          <Avatar sx={{ border: "1px solid black" }}>
             <img src={panda} alt="Logo" width="100" height="100" />
           </Avatar>
         }

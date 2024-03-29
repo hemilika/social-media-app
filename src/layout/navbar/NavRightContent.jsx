@@ -1,10 +1,26 @@
 import { Badge, Stack, Typography } from "@mui/material";
-
-const NavRightContent = ({ contentName, icon, badge, style }) => {
+import { useNavigate } from "react-router-dom";
+const NavRightContent = ({
+  contentName,
+  icon,
+  badge,
+  style,
+  navigationPath,
+}) => {
+  const navigate = useNavigate();
+  const handleNavigate = (path) => {
+    if (navigationPath) {
+      navigate(`${path}`);
+    }
+  };
   return (
     <>
       {badge ? (
-        <Stack alignItems="center" sx={style}>
+        <Stack
+          alignItems="center"
+          sx={style}
+          onClick={() => handleNavigate(navigationPath)}
+        >
           <Badge badgeContent={3} color="primary">
             {icon}
           </Badge>
@@ -13,7 +29,11 @@ const NavRightContent = ({ contentName, icon, badge, style }) => {
           </Typography>
         </Stack>
       ) : (
-        <Stack alignItems="center" sx={style}>
+        <Stack
+          alignItems="center"
+          sx={style}
+          onClick={() => handleNavigate(navigationPath)}
+        >
           {icon}
           <Typography variant="small" color="grey">
             {contentName}
