@@ -1,8 +1,8 @@
 import { Grid } from "@mui/material";
-import ProfileContent from "../layout/page-content/ProfileContent";
-import ForumsContent from "../layout/page-content/ForumsContent";
-import MainContent from "../layout/page-content/MainContent";
-import AddPost from "../layout/page-content/AddPost";
+import ProfileContent from "../components/home-page/ProfileContent";
+import ForumsContent from "../components/home-page/ForumsContent";
+import MainContent from "../components/home-page/MainContent";
+import AddPost from "../components/home-page/AddPost";
 
 const HomePage = () => {
   return (

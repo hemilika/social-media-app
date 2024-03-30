@@ -7,7 +7,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import NavRightContent from "./NavRightContent";
 import SearchBar from "./SearchBar";
 import { Outlet } from "react-router-dom";
-import devconnect from "../../../public/devconnectlogo.png";
+import devconnect from "/devconnectlogo.png";
 const Navbar = () => {
   const navContentStyle = {
     cursor: "pointer",

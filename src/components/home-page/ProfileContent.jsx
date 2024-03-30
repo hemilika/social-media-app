@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Card,
   CardHeader,
@@ -8,7 +7,7 @@ import {
   Divider,
   Stack,
 } from "@mui/material";
-import panda from "../../../public/panda.webp";
+import panda from "../../assets/panda.webp";
 const ProfileContent = () => {
   return (
     <Card>

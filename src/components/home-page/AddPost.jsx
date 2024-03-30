@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { PermMedia } from "@mui/icons-material";
-import panda from "../../../public/panda.webp";
+import panda from "../../assets/panda.webp";
 const AddPost = () => {
   return (
     <Card sx={{ mt: "10px", padding: "10px" }}>
