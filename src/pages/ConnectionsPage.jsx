@@ -1,7 +1,7 @@
-import React from "react";
+import YourConnections from "../components/connections/YourConnections";
 
 const ConnectionsPage = () => {
-  return <div>ConnectionsPage</div>;
+  return <YourConnections />;
 };
 
 export default ConnectionsPage;

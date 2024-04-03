@@ -1,49 +1,40 @@
-import { Typography, AppBar, Toolbar, Stack } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import PeopleIcon from "@mui/icons-material/People";
-import ForumIcon from "@mui/icons-material/Forum";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import { Typography, AppBar, Toolbar, Stack, IconButton } from "@mui/material";
 import NavRightContent from "./NavRightContent";
 import SearchBar from "./SearchBar";
 import { Outlet } from "react-router-dom";
 import devconnect from "/devconnectlogo.png";
+import { useState } from "react";
+import LeftDrawer from "./LeftDrawer";
+import { Menu } from "@mui/icons-material";
+import { useContext } from "react";
+import { AppContext } from "../../hooks/AppContext";
 const Navbar = () => {
+  const { navbarItems } = useContext(AppContext);
+  const [open, setOpen] = useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const navContentStyle = {
     cursor: "pointer",
   };
-  const navbarItems = [
-    {
-      navigationPath: "/home",
-      contentName: "Home",
-      icon: <HomeIcon />,
-    },
-    {
-      navigationPath: "/connections",
-      contentName: "Connections",
-      icon: <PeopleIcon />,
-    },
-    {
-      navigationPath: "/forums",
-      contentName: "Forum",
-      icon: <ForumIcon />,
-    },
-    {
-      contentName: "Notifications",
-      badge: "Notifications",
-      icon: <NotificationsIcon />,
-    },
-    {
-      navigationPath: "/account",
-      contentName: "Account",
-      icon: <AccountBoxIcon />,
-    },
-  ];
 
   return (
     <Stack spacing={8}>
       <AppBar color="default" sx={{ boxShadow: 0 }}>
         <Toolbar>
+          <IconButton
+            onClick={handleDrawerOpen}
+            color="inherit"
+            variant="contained"
+          >
+            <Menu />
+          </IconButton>
+          <LeftDrawer open={open} handleClose={handleClose} />
           <Stack
             direction="row"
             spacing={3}
@@ -59,9 +50,10 @@ const Navbar = () => {
               <SearchBar />
             </Stack>
             <Stack direction={"row"} spacing={3}>
-              {navbarItems.map((content) => {
+              {navbarItems.map((content, index) => {
                 return (
                   <NavRightContent
+                    key={index}
                     contentName={content.contentName}
                     icon={content.icon}
                     badge={content.badge}
