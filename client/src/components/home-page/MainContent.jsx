@@ -12,17 +12,15 @@ import {
   InputAdornment,
 } from "@mui/material";
 import {
-  AccountCircle,
   Comment,
   EmojiEmotions,
   Favorite,
   Sync,
   Textsms,
-  ThumbUp,
 } from "@mui/icons-material";
-import mandi from "../../../public/mandi.png";
-import kalaja from "../../../public/kalaja.jpg";
-import panda from "../../../public/panda.webp";
+import mandi from "../../assets/mandi.png";
+import kalaja from "../../assets/kalaja.jpg";
+import panda from "../../assets/panda.webp";
 const MainContent = () => {
   return (
     <>

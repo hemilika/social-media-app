@@ -1,4 +1,4 @@
-import { EventNote, Forum, People } from "@mui/icons-material";
+import { EventNote, Forum } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -8,18 +8,23 @@ import {
   Typography,
 } from "@mui/material";
 import { PermMedia } from "@mui/icons-material";
-import panda from "../../../public/panda.webp";
+import panda from "../../assets/panda.webp";
 const AddPost = () => {
   return (
     <Card sx={{ mt: "10px", padding: "10px" }}>
       <Stack direction="row" spacing={1} alignItems="center">
-        <Avatar>
+        <Avatar sx={{ border: "1px solid black" }}>
           <img src={panda} alt="" width="100" height="100" />
         </Avatar>
         <TextField
           placeholder="Post something"
           fullWidth
-          sx={{ padding: "5px" }}
+          sx={{
+            padding: "5px",
+            "& .MuiInputBase-root": {
+              borderRadius: "50px",
+            },
+          }}
         ></TextField>
       </Stack>
       <Stack direction="row" justifyContent="space-evenly">

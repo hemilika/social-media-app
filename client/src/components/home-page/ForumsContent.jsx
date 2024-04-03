@@ -5,9 +5,9 @@ import { Add, Visibility } from "@mui/icons-material";
 const ForumsContent = () => {
   return (
     <Card>
-      {dummyForums.map((forum) => {
+      {dummyForums.map((forum, index) => {
         return (
-          <Card sx={{ borderRadius: "0" }}>
+          <Card sx={{ borderRadius: "0" }} key={index}>
             <CardHeader
               title={forum.name}
               subheader={forum.description}
