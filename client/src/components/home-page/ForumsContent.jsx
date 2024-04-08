@@ -2,26 +2,24 @@ import React from "react";
 import { Button, ButtonGroup, Card, CardHeader } from "@mui/material";
 import { dummyForums } from "../../dummy-data/dummyData";
 import { Add, Visibility } from "@mui/icons-material";
+import { Copyright } from "../../pages/LoginPage";
 const ForumsContent = () => {
   return (
-    <Card>
-      {dummyForums.map((forum, index) => {
-        return (
-          <Card sx={{ borderRadius: "0" }} key={index}>
-            <CardHeader
-              title={forum.name}
-              subheader={forum.description}
-            ></CardHeader>
-            <ButtonGroup size="small" sx={{ ml: "15%", mb: "15px" }}>
-              <Button startIcon={<Add />} variant="contained">
-                Follow
-              </Button>
+    <>
+      <Card>
+        {dummyForums.map((forum, index) => {
+          return (
+            <Card sx={{ borderRadius: "0" }} key={index}>
+              <CardHeader
+                title={forum.name}
+                subheader={forum.description}
+              ></CardHeader>
               <Button endIcon={<Visibility />}>View </Button>
-            </ButtonGroup>
-          </Card>
-        );
-      })}
-    </Card>
+            </Card>
+          );
+        })}
+      </Card>
+    </>
   );
 };
 

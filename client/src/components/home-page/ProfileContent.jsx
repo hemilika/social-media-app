@@ -7,8 +7,12 @@ import {
   Divider,
   Stack,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import panda from "../../assets/panda.webp";
+
 const ProfileContent = () => {
+  const navigate = useNavigate();
+
   return (
     <Stack spacing={5}>
       <Card>
@@ -32,6 +36,7 @@ const ProfileContent = () => {
                 variant="body2"
                 color="primary"
                 sx={{ cursor: "pointer" }}
+                onClick={() => navigate("/account")}
               >
                 hemibobi11@gmail.com
               </Typography>
@@ -44,6 +49,7 @@ const ProfileContent = () => {
                 variant="body2"
                 color="primary"
                 sx={{ cursor: "pointer" }}
+                onClick={() => navigate("/account")}
               >
                 hemi11
               </Typography>
@@ -59,6 +65,7 @@ const ProfileContent = () => {
                 variant="body2"
                 color="primary"
                 sx={{ cursor: "pointer" }}
+                onClick={() => navigate("/connections")}
               >
                 17
               </Typography>

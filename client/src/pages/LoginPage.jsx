@@ -13,14 +13,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 
-function Copyright(props) {
+export function Copyright() {
   return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
+    <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
       <Typography>DevConnect</Typography>
       {new Date().getFullYear()}

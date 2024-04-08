@@ -3,6 +3,7 @@ import ProfileContent from "../components/home-page/ProfileContent";
 import ForumsContent from "../components/home-page/ForumsContent";
 import MainContent from "../components/home-page/MainContent";
 import AddPost from "../components/home-page/AddPost";
+import { Copyright } from "./LoginPage";
 
 const HomePage = () => {
   return (
