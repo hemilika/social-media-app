@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, ButtonGroup, Card, CardHeader } from "@mui/material";
+import { Button, Card, CardHeader, Stack, Typography } from "@mui/material";
 import { dummyForums } from "../../dummy-data/dummyData";
-import { Add, Visibility } from "@mui/icons-material";
-import { Copyright } from "../../pages/LoginPage";
+import { ArrowRightAlt, Visibility } from "@mui/icons-material";
 const ForumsContent = () => {
   return (
-    <>
+    <Stack alignItems="center">
+      <Typography variant="subtitle1">Explore Forums</Typography>
       <Card>
         {dummyForums.map((forum, index) => {
           return (
@@ -14,12 +14,20 @@ const ForumsContent = () => {
                 title={forum.name}
                 subheader={forum.description}
               ></CardHeader>
-              <Button endIcon={<Visibility />}>View </Button>
+              <Stack
+                direction="row"
+                spacing={1}
+                justifyContent="center"
+                marginBottom="5px"
+              >
+                <Button endIcon={<Visibility />}>View </Button>
+                <Button endIcon={<ArrowRightAlt />}>Join </Button>
+              </Stack>
             </Card>
           );
         })}
       </Card>
-    </>
+    </Stack>
   );
 };
 

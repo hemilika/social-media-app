@@ -6,12 +6,11 @@ import {
   Stack,
   CardHeader,
   Typography,
-  Skeleton,
 } from "@mui/material";
 import { yourConnections } from "../../dummy-data/dummyData";
 const YourConnections = () => {
   return (
-    <Stack position="sticky">
+    <Stack width="350px">
       <Typography>Your Connections</Typography>
       <Stack spacing={2}>
         {yourConnections.map((connection, index) => {
