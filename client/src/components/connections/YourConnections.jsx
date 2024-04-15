@@ -1,11 +1,18 @@
-import { Agriculture } from "@mui/icons-material";
-import { Avatar, Card, CardHeader, Grid, Typography } from "@mui/material";
+import { Agriculture, ArrowRightAlt } from "@mui/icons-material";
+import {
+  Avatar,
+  Button,
+  Card,
+  Stack,
+  CardHeader,
+  Typography,
+} from "@mui/material";
 import { yourConnections } from "../../dummy-data/dummyData";
 const YourConnections = () => {
   return (
-    <Grid container>
-      <Grid item>
-        <Typography>Your Connections</Typography>
+    <Stack width="350px">
+      <Typography>Your Connections</Typography>
+      <Stack spacing={2}>
         {yourConnections.map((connection, index) => {
           return (
             <Card
@@ -24,8 +31,11 @@ const YourConnections = () => {
             </Card>
           );
         })}
-      </Grid>
-    </Grid>
+      </Stack>
+      <Stack item>
+        <Button endIcon={<ArrowRightAlt />}>Show All Connections</Button>
+      </Stack>
+    </Stack>
   );
 };
 

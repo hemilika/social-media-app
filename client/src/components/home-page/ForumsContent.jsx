@@ -1,27 +1,33 @@
 import React from "react";
-import { Button, ButtonGroup, Card, CardHeader } from "@mui/material";
+import { Button, Card, CardHeader, Stack, Typography } from "@mui/material";
 import { dummyForums } from "../../dummy-data/dummyData";
-import { Add, Visibility } from "@mui/icons-material";
+import { ArrowRightAlt, Visibility } from "@mui/icons-material";
 const ForumsContent = () => {
   return (
-    <Card>
-      {dummyForums.map((forum, index) => {
-        return (
-          <Card sx={{ borderRadius: "0" }} key={index}>
-            <CardHeader
-              title={forum.name}
-              subheader={forum.description}
-            ></CardHeader>
-            <ButtonGroup size="small" sx={{ ml: "15%", mb: "15px" }}>
-              <Button startIcon={<Add />} variant="contained">
-                Follow
-              </Button>
-              <Button endIcon={<Visibility />}>View </Button>
-            </ButtonGroup>
-          </Card>
-        );
-      })}
-    </Card>
+    <Stack alignItems="center">
+      <Typography variant="subtitle1">Explore Forums</Typography>
+      <Card>
+        {dummyForums.map((forum, index) => {
+          return (
+            <Card sx={{ borderRadius: "0" }} key={index}>
+              <CardHeader
+                title={forum.name}
+                subheader={forum.description}
+              ></CardHeader>
+              <Stack
+                direction="row"
+                spacing={1}
+                justifyContent="center"
+                marginBottom="5px"
+              >
+                <Button endIcon={<Visibility />}>View </Button>
+                <Button endIcon={<ArrowRightAlt />}>Join </Button>
+              </Stack>
+            </Card>
+          );
+        })}
+      </Card>
+    </Stack>
   );
 };
 

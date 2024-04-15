@@ -1,16 +1,19 @@
 import { Typography, AppBar, Toolbar, Stack, IconButton } from "@mui/material";
 import NavRightContent from "./NavRightContent";
 import SearchBar from "./SearchBar";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import devconnect from "/devconnectlogo.png";
 import { useState } from "react";
 import LeftDrawer from "./LeftDrawer";
 import { Menu } from "@mui/icons-material";
 import { useContext } from "react";
 import { AppContext } from "../../hooks/AppContext";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const { navbarItems } = useContext(AppContext);
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -42,7 +45,12 @@ const Navbar = () => {
             width="100%"
             alignItems="center"
           >
-            <Stack direction="row" spacing={1}>
+            <Stack
+              direction="row"
+              spacing={1}
+              onClick={() => navigate("/home")}
+              sx={{ cursor: "pointer" }}
+            >
               <img src={devconnect} width={35} height={32} />
               <Typography variant="h6">DevConnect</Typography>
             </Stack>
