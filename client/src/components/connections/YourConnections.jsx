@@ -1,4 +1,4 @@
-import { Agriculture, ArrowRightAlt } from "@mui/icons-material";
+import { Agriculture, ArrowDownward } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -10,14 +10,14 @@ import {
 import { yourConnections } from "../../dummy-data/dummyData";
 const YourConnections = () => {
   return (
-    <Stack width="350px">
+    <Stack width="300px" marginTop="4px">
       <Typography>Your Connections</Typography>
       <Stack spacing={2}>
         {yourConnections.map((connection, index) => {
           return (
             <Card
               key={index}
-              sx={{ border: "1px solid lightgrey", borderRadius: "0" }}
+              sx={{ border: "1px solid lightgrey", borderRadius: "10" }}
             >
               <CardHeader
                 title={connection.name}
@@ -32,8 +32,8 @@ const YourConnections = () => {
           );
         })}
       </Stack>
-      <Stack item>
-        <Button endIcon={<ArrowRightAlt />}>Show All Connections</Button>
+      <Stack paddingTop="10px">
+        <Button endIcon={<ArrowDownward />}>Show More</Button>
       </Stack>
     </Stack>
   );
