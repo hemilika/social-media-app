@@ -1,3 +1,4 @@
+import { Upload } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -26,7 +27,7 @@ const AccountInfo = () => {
           </Stack>
         </Stack>
         <Stack direction="row" spacing={1} alignItems="center">
-          <Button color="inherit" variant="contained">
+          <Button color="inherit" variant="contained" startIcon={<Upload />}>
             <Typography color="GrayText" variant="button">
               Upload picture
             </Typography>
