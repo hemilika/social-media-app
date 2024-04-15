@@ -19,13 +19,13 @@ const HomePage = () => {
       >
         <ProfileContent />
       </Grid>
-      <Grid item xs={7.5} style={{ paddingLeft: "2%" }}>
+      <Grid item xs={7.2} style={{ paddingLeft: "2%" }}>
         <AddPost />
         <MainContent />
       </Grid>
       <Grid
         item
-        xs={3}
+        xs={2.5}
         style={{ position: "absolute", top: 80, right: 20, height: "100vh" }}
       >
         <ForumsContent />
