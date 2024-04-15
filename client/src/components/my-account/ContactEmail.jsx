@@ -16,7 +16,12 @@ const ContactEmail = () => {
       <Typography variant="subtitle2" color="GrayText">
         Manage your accounts email address for contacting.
       </Typography>
-      <Stack justifyContent="space-between" direction="row" paddingTop="10px">
+      <Stack
+        justifyContent="space-between"
+        direction="row"
+        paddingTop="10px"
+        alignItems="center"
+      >
         <TextField
           sx={{ mt: "5px", mb: "15px" }}
           type="email"
