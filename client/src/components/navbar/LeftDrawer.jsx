@@ -3,7 +3,7 @@ import DrawerList from "./DrawerList";
 const LeftDrawer = ({ open, handleClose }) => {
   return (
     <Drawer open={open} onClose={handleClose}>
-      <DrawerList />
+      <DrawerList onClose={handleClose} />
     </Drawer>
   );
 };

@@ -107,7 +107,6 @@ const ProfileContent = () => {
               <Typography variant="body2" color="text.secondary">
                 Education
               </Typography>
-              ``
               <Typography variant="body2">UET</Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">
