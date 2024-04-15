@@ -81,3 +81,31 @@ export const newConnections = [
     field: "Backend Developer",
   },
 ];
+
+export const notifications = [
+  {
+    id: 1,
+    message: "User liked your photo",
+    time: "11:27 14/4/2024",
+  },
+  {
+    id: 2,
+    message: "User commented your photo",
+    time: "11:27 14/4/2024",
+  },
+  {
+    id: 3,
+    message: "User started following you",
+    time: "11:27 14/4/2024",
+  },
+  {
+    id: 4,
+    message: "User liked your photo",
+    time: "11:27 14/4/2024",
+  },
+  {
+    id: 5,
+    message: "User liked your comment",
+    time: "11:27 14/4/2024",
+  },
+];

@@ -11,6 +11,7 @@ const AccountPassword = () => {
       <Stack direction="row" justifyContent="space-between" paddingTop="10px">
         <TextField
           label="Current Password"
+          type="password"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -27,6 +28,7 @@ const AccountPassword = () => {
         />
         <TextField
           label="New Password"
+          type="password"
           sx={{ width: "500px" }}
           InputProps={{
             startAdornment: (
