@@ -5,15 +5,21 @@ import { ArrowRightAlt, Visibility } from "@mui/icons-material";
 const ForumsContent = () => {
   return (
     <Stack alignItems="center">
-      <Typography variant="subtitle1">Explore Forums</Typography>
       <Card>
+        <Typography variant="subtitle1" sx={{ ml: "25%" }}>
+          Explore Forums
+        </Typography>
         {dummyForums.map((forum, index) => {
           return (
             <Card sx={{ borderRadius: "0" }} key={index}>
-              <CardHeader
-                title={forum.name}
-                subheader={forum.description}
-              ></CardHeader>
+              <CardHeader title={forum.name} subheader={forum.description} />
+              <Typography
+                variant="subtitle2"
+                color="GrayText"
+                sx={{ marginLeft: "18px", marginTop: "-10px" }}
+              >
+                Members: 54
+              </Typography>
               <Stack
                 direction="row"
                 spacing={1}

@@ -1,6 +1,11 @@
 import { Badge, Stack, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Notifcations from "../notifications/Notifcations";
 const NavRightContent = ({
+  handleNotifications,
+  handleNotificationsClose,
+  openNotifications,
+  notificationsAnchorEl,
   contentName,
   icon,
   badge,
@@ -13,21 +18,29 @@ const NavRightContent = ({
       navigate(`${path}`);
     }
   };
+
   return (
     <>
       {badge ? (
-        <Stack
-          alignItems="center"
-          sx={style}
-          onClick={() => handleNavigate(navigationPath)}
-        >
-          <Badge badgeContent={3} color="primary">
-            {icon}
-          </Badge>
-          <Typography variant="small" color="grey">
-            {contentName}
-          </Typography>
-        </Stack>
+        <>
+          <Stack
+            alignItems="center"
+            sx={style}
+            onClick={(e) => handleNotifications(e)}
+          >
+            <Badge badgeContent={3} color="primary">
+              {icon}
+            </Badge>
+            <Typography variant="small" color="grey">
+              {contentName}
+            </Typography>
+          </Stack>
+          <Notifcations
+            onClose={handleNotificationsClose}
+            open={openNotifications}
+            anchorEl={notificationsAnchorEl}
+          />
+        </>
       ) : (
         <Stack
           alignItems="center"

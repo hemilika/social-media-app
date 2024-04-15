@@ -12,13 +12,14 @@ import { Button, Stack, Typography } from "@mui/material";
 import { Logout } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-const DrawerList = () => {
+const DrawerList = ({ onClose }) => {
   const { navbarItems } = useContext(AppContext);
 
   const navigate = useNavigate();
 
   const handleNavigate = (path) => {
     navigate(`${path}`);
+    onClose();
   };
 
   return (
@@ -31,16 +32,18 @@ const DrawerList = () => {
           </Stack>
           <Divider />
           <List>
-            {navbarItems.map((content, index) => (
-              <ListItem key={index} disablePadding>
-                <ListItemButton
-                  onClick={() => handleNavigate(content.navigationPath)}
-                >
-                  <ListItemIcon>{content.icon}</ListItemIcon>
-                  <ListItemText primary={content.contentName} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {navbarItems
+              .filter((content) => content.contentName !== "Notifications")
+              .map((content, index) => (
+                <ListItem key={index} disablePadding>
+                  <ListItemButton
+                    onClick={() => handleNavigate(content.navigationPath)}
+                  >
+                    <ListItemIcon>{content.icon}</ListItemIcon>
+                    <ListItemText primary={content.contentName} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
           </List>
         </Stack>
         <Button endIcon={<Logout />} onClick={() => navigate("/login")}>

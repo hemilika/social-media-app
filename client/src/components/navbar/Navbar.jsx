@@ -13,6 +13,17 @@ const Navbar = () => {
   const { navbarItems } = useContext(AppContext);
   const [open, setOpen] = useState(false);
 
+  const [notificationsAnchorEl, setNotificationsAnchorEl] = useState(null);
+  const [openNotifications, setOpenNotifications] = useState(false);
+
+  const handleNotifications = (e) => {
+    setNotificationsAnchorEl(e.currentTarget);
+    setOpenNotifications(true);
+  };
+  const handleNotificationsClose = () => {
+    setNotificationsAnchorEl(null);
+    setOpenNotifications(false);
+  };
   const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
@@ -61,6 +72,10 @@ const Navbar = () => {
               {navbarItems.map((content, index) => {
                 return (
                   <NavRightContent
+                    handleNotifications={handleNotifications}
+                    handleNotificationsClose={handleNotificationsClose}
+                    openNotifications={openNotifications}
+                    notificationsAnchorEl={notificationsAnchorEl}
                     key={index}
                     contentName={content.contentName}
                     icon={content.icon}
