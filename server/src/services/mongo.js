@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
-const MONGO_URL =
-  "mongodb+srv://social-media-hemi:Mediasociale11.@cluster0.5vaelp5.mongodb.net/?retryWrites=true&w=majority";
+require("dotenv").config();
+
+const MONGO_URL = process.env.MONGO_URL;
 
 mongoose.connection.once("open", () => {
   console.log("MongoDb connection ready!");
@@ -13,7 +14,6 @@ mongoose.connection.on("error", (err) => {
 
 const mongoConnect = async () => {
   mongoose.connect(MONGO_URL);
-  console.log("MongoDB connection success");
 };
 
 const mongoDisconnect = async () => {
