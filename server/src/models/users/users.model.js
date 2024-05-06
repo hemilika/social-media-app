@@ -1,8 +1,11 @@
-const users = require("./users.mongo");
-const axios = require("axios");
+const Users = require("./users.mongo");
 
 const getUsers = async () => {
-  console.log("Getting users from database...");
-  return await users.findById();
+  try {
+    const allUsers = Users.find();
+    return allUsers;
+  } catch (err) {
+    console.log(err);
+  }
 };
-module.exports = { users };
+module.exports = { getUsers };

@@ -22,7 +22,6 @@ import mandi from "../../assets/mandi.png";
 import kalaja from "../../assets/kalaja.jpg";
 import panda from "../../assets/panda.webp";
 import LoadMore from "./LoadMore";
-import { Copyright } from "../../pages/LoginPage";
 const MainContent = () => {
   return (
     <Stack>
@@ -276,7 +275,6 @@ const MainContent = () => {
         </CardContent>
       </Card>
       <LoadMore />
-      <Copyright />
     </Stack>
   );
 };
