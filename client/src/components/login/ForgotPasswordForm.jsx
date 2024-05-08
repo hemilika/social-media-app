@@ -11,7 +11,8 @@ import Container from "@mui/material/Container";
 import { useNavigate, Link } from "react-router-dom";
 
 import devConnectLogo from "/devconnectlogo.png";
-const LoginForm = () => {
+
+const ForgotPasswordForm = () => {
   const navigate = useNavigate();
   return (
     <Container component="main" maxWidth="xs">
@@ -29,7 +30,7 @@ const LoginForm = () => {
           src={devConnectLogo}
         />
         <Typography component="h1" variant="h5">
-          Sign in to DevConnect
+          Change Password
         </Typography>
         <Box sx={{ mt: 1 }}>
           <TextField
@@ -44,12 +45,16 @@ const LoginForm = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="New Password"
             type="password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Confirm Password"
+            type="password"
           />
           <Button
             type="submit"
@@ -58,14 +63,11 @@ const LoginForm = () => {
             sx={{ mt: 3, mb: 2 }}
             onClick={() => navigate("/home")}
           >
-            Sign In
+            Confirm Changes
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link to={"/forgot-password"}>Forgot password?</Link>
-            </Grid>
             <Grid item>
-              <Link to={"/sign-up"}>Don't have an account? Sign Up</Link>
+              <Link to={"/login"}>Already have an account? Log In</Link>
             </Grid>
           </Grid>
         </Box>
@@ -74,4 +76,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;

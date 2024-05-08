@@ -2,16 +2,14 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate, Link } from "react-router-dom";
-
 import devConnectLogo from "/devconnectlogo.png";
-const LoginForm = () => {
+
+const SignUpForm = () => {
   const navigate = useNavigate();
   return (
     <Container component="main" maxWidth="xs">
@@ -29,16 +27,17 @@ const LoginForm = () => {
           src={devConnectLogo}
         />
         <Typography component="h1" variant="h5">
-          Sign in to DevConnect
+          Sign up for DevConnect
         </Typography>
         <Box sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
-            label="Username"
+            label="Email address"
             autoFocus
           />
+          <TextField margin="normal" required fullWidth label="Username" />
           <TextField
             margin="normal"
             required
@@ -47,9 +46,13 @@ const LoginForm = () => {
             label="Password"
             type="password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Retype Password"
+            type="password"
           />
           <Button
             type="submit"
@@ -58,14 +61,11 @@ const LoginForm = () => {
             sx={{ mt: 3, mb: 2 }}
             onClick={() => navigate("/home")}
           >
-            Sign In
+            Register
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link to={"/forgot-password"}>Forgot password?</Link>
-            </Grid>
             <Grid item>
-              <Link to={"/sign-up"}>Don't have an account? Sign Up</Link>
+              <Link to={"/login"}>{"Already have an account? Log in"}</Link>
             </Grid>
           </Grid>
         </Box>
@@ -74,4 +74,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;

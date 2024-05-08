@@ -1,13 +1,13 @@
 import { Stack } from "@mui/material";
-import LoginForm from "../components/login/LoginForm";
+import SignUpForm from "../components/login/SignUpForm";
 import devconnectbackground from "/devconnectbackground.jpg";
-const LoginPage = () => {
+const SignUpPage = () => {
   return (
     <Stack direction="row" alignItems="center">
       <img src={devconnectbackground} />
-      <LoginForm />
+      <SignUpForm />
     </Stack>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
