@@ -3,8 +3,11 @@ import React from "react";
 import MyForums from "../components/forum/MyForums";
 import ForumsContent from "../components/home-page/ForumsContent";
 import MainContentForums from "../components/forum/MainContentForums";
+import useGetForums from "../hooks/use-get-forums";
 
 const ForumsPage = () => {
+  const { forums, loading: loadingForums } = useGetForums();
+
   return (
     <Grid container>
       <Grid item xs={2.5}>
@@ -14,7 +17,7 @@ const ForumsPage = () => {
         <MainContentForums />
       </Grid>
       <Grid item xs={2.5}>
-        <ForumsContent />
+        <ForumsContent forums={forums} loading={loadingForums} />
       </Grid>
     </Grid>
   );

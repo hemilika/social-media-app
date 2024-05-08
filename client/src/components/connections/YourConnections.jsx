@@ -7,9 +7,7 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
-import { yourConnections } from "../../dummy-data/dummyData";
 const YourConnections = ({ connections }) => {
-  console.log(connections);
   return (
     <Stack width="300px" marginTop="4px">
       <Typography>Your Connections</Typography>
