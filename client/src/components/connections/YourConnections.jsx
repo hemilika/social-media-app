@@ -8,20 +8,21 @@ import {
   Typography,
 } from "@mui/material";
 import { yourConnections } from "../../dummy-data/dummyData";
-const YourConnections = () => {
+const YourConnections = ({ connections }) => {
+  console.log(connections);
   return (
     <Stack width="300px" marginTop="4px">
       <Typography>Your Connections</Typography>
       <Stack spacing={2}>
-        {yourConnections.map((connection, index) => {
+        {connections.map((connection, index) => {
           return (
             <Card
               key={index}
               sx={{ border: "1px solid lightgrey", borderRadius: "10" }}
             >
               <CardHeader
-                title={connection.name}
-                subheader={connection.connections}
+                title={connection.connectedUser.username}
+                subheader={`${connection.connectedUser.connections} connections`}
                 avatar={
                   <Avatar>
                     <Agriculture />

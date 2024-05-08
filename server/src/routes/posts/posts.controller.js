@@ -1,6 +1,7 @@
-const { posts } = require("../../models/posts/posts.model");
+const { getPosts } = require("../../models/posts/posts.model");
 
-const getAllPosts = (req, res) => {
+const getAllPosts = async (req, res) => {
+  const posts = await getPosts();
   return res.status(200).json(posts);
 };
 

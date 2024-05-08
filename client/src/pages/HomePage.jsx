@@ -3,8 +3,11 @@ import ProfileContent from "../components/home-page/ProfileContent";
 import ForumsContent from "../components/home-page/ForumsContent";
 import MainContent from "../components/home-page/MainContent";
 import AddPost from "../components/home-page/AddPost";
+import useGetPosts from "../hooks/use-get-posts";
 
 const HomePage = () => {
+  const { posts, loading } = useGetPosts();
+
   return (
     <Grid container>
       <Grid
@@ -21,7 +24,7 @@ const HomePage = () => {
       </Grid>
       <Grid item xs={7.2} style={{ paddingLeft: "2%" }}>
         <AddPost />
-        <MainContent />
+        <MainContent posts={posts} loading={loading} />
       </Grid>
       <Grid
         item

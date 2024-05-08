@@ -2,25 +2,29 @@ const mongoose = require("mongoose");
 
 const postsSchema = new mongoose.Schema({
   posterUsername: {
-    type: "String",
+    type: String,
     required: true,
   },
   datePosted: {
-    type: "String",
+    type: Date,
     required: true,
   },
   description: {
-    type: "String",
+    type: String,
     required: false,
   },
   likes: {
-    type: "String",
+    type: Number,
     required: false,
   },
   comments: {
-    type: "String",
+    type: [Object],
+    required: false,
+  },
+  media: {
+    type: String,
     required: false,
   },
 });
 
-module.exports = mongoose.model("Posts", postsSchema);
+module.exports = mongoose.model("posts", postsSchema);

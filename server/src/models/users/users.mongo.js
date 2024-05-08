@@ -2,39 +2,39 @@ const mongoose = require("mongoose");
 
 const usersSchema = new mongoose.Schema({
   username: {
-    type: "String",
+    type: String,
     required: true,
   },
   email: {
-    type: "String",
+    type: String,
     required: true,
   },
   connections: {
-    type: "String",
+    type: Number,
     required: false,
   },
   forums: {
-    type: "String",
+    type: String,
     required: false,
   },
   jobField: {
-    type: "String",
+    type: String,
     required: false,
   },
   experience: {
-    type: "String",
+    type: String,
     required: false,
   },
   education: {
-    type: "String",
+    type: String,
     required: false,
   },
   degree: {
-    type: "String",
+    type: String,
     required: false,
   },
   interests: {
-    type: "String",
+    type: String,
     required: false,
   },
 });

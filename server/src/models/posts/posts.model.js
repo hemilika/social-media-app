@@ -1,12 +1,11 @@
-const Posts = require("./posts.mongo");
+const posts = require("./posts.mongo");
 
 const getPosts = async () => {
-  console.log("Getting posts from database...");
   try {
-    const allPosts = Posts.find();
+    const allPosts = posts.find().exec();
     return allPosts;
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    console.log(err);
   }
 };
 module.exports = { getPosts };
