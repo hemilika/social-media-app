@@ -9,29 +9,41 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { newConnections } from "../../dummy-data/dummyData";
-import { ArrowDownward, Language } from "@mui/icons-material";
-const NewConnections = () => {
+import {
+  ArrowDownward,
+  Computer,
+  Language,
+  People,
+  School,
+} from "@mui/icons-material";
+import { NameUsername } from "./YourConnections";
+const NewConnections = ({ loading, suggestions }) => {
+  if (loading) return <div>Loading suggestions...</div>;
   return (
     <>
       <Typography variant="subtitle1">New Connections Suggestions</Typography>
       <Grid container spacing={1}>
-        {newConnections.map((connection, index) => {
+        {suggestions.map((connection, index) => {
           return (
             <Grid item key={index} xs={12} md={6}>
               <Card>
                 <CardHeader
-                  title={connection.name}
+                  title={<NameUsername user={connection} />}
                   subheader={
                     <Stack direction="row" spacing={3} alignItems="center">
                       <Stack width="25%">
                         <Typography variant="subtitle2" color="GrayText">
-                          {connection.connections}
+                          <Stack direction="row" alignItems={"center"}>
+                            <People sx={{ mr: "5px" }} />
+                            {`${connection.connections} connections`}
+                          </Stack>
                         </Typography>
                         <Stack direction="row" alignItems="center">
                           <Language />
                           <Typography variant="subtitle2" color="GrayText">
-                            {connection.date_joined}
+                            {new Date(
+                              connection.dateJoined
+                            ).toLocaleDateString()}
                           </Typography>
                         </Stack>
                       </Stack>
@@ -41,10 +53,16 @@ const NewConnections = () => {
                       />
                       <Stack>
                         <Typography variant="subtitle2" color="GrayText">
-                          {connection.field}
+                          <Stack direction="row" alignItems="center">
+                            <Computer sx={{ mr: "5px" }} />
+                            {connection.jobField}
+                          </Stack>
                         </Typography>
                         <Typography variant="subtitle2" color="GrayText">
-                          {connection.education}
+                          <Stack direction="row" alignItems="center">
+                            <School sx={{ mr: "5px" }} />
+                            {connection.education}
+                          </Stack>
                         </Typography>
                       </Stack>
                       <ButtonGroup sx={{ height: "30px", width: "160px" }}>
@@ -55,7 +73,7 @@ const NewConnections = () => {
                   }
                   avatar={
                     <Avatar
-                      src={connection.avatar}
+                      src={connection.profilePicture}
                       sx={{ width: "60px", height: "60px" }}
                     />
                   }

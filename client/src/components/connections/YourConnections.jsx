@@ -7,6 +7,17 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
+export const NameUsername = ({ user }) => {
+  return (
+    <Stack direction="row">
+      <Typography variant="subtitle2">{user.fullName}</Typography>
+      &nbsp;{" - "} &nbsp;
+      <Typography variant="subtitle2" fontWeight="bold">
+        {user.username}
+      </Typography>
+    </Stack>
+  );
+};
 const YourConnections = ({ connections }) => {
   return (
     <Stack width="300px" marginTop="4px">
@@ -19,13 +30,9 @@ const YourConnections = ({ connections }) => {
               sx={{ border: "1px solid lightgrey", borderRadius: "10" }}
             >
               <CardHeader
-                title={connection.connectedUser.username}
-                subheader={`${connection.connectedUser.connections} connections`}
-                avatar={
-                  <Avatar>
-                    <Agriculture />
-                  </Avatar>
-                }
+                title={<NameUsername user={connection} />}
+                subheader={`${connection.connections} connections`}
+                avatar={<Avatar src={connection.profilePicture} />}
               />
             </Card>
           );

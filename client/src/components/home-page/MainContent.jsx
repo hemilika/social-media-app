@@ -11,15 +11,8 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import {
-  Comment,
-  EmojiEmotions,
-  Favorite,
-  Sync,
-  Textsms,
-} from "@mui/icons-material";
+import { Comment, EmojiEmotions, Favorite, Textsms } from "@mui/icons-material";
 import mandi from "../../assets/mandi.png";
-import kalaja from "../../assets/kalaja.jpg";
 import panda from "../../assets/panda.webp";
 import LoadMore from "./LoadMore";
 import DatePosted from "./DatePosted";
@@ -28,7 +21,6 @@ const MainContent = ({ posts, loading }) => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(posts);
   return (
     <Stack>
       {posts?.map((post) => {

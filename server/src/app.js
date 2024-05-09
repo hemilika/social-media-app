@@ -7,6 +7,9 @@ const {
   connectionsRouter,
 } = require("./routes/connections/connections.router");
 const { forumsRouter } = require("./routes/forums/forums.router");
+const {
+  suggestionsRouter,
+} = require("./routes/suggestions/suggestions.router");
 
 const app = express();
 
@@ -16,5 +19,6 @@ app.use(usersRouter);
 app.use(postsRouter);
 app.use(connectionsRouter);
 app.use(forumsRouter);
+app.use(suggestionsRouter);
 
 module.exports = app;

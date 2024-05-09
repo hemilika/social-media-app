@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
 const connectionsSchema = new mongoose.Schema({
-  yourConnections: {
-    type: [Object],
+  username: {
+    type: String,
+    required: true,
+  },
+  connections: {
+    type: Number,
+    required: true,
+  },
+  fullName: {
+    type: String,
     required: true,
   },
 });
