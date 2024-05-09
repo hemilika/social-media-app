@@ -11,8 +11,21 @@ import Container from "@mui/material/Container";
 import { useNavigate, Link } from "react-router-dom";
 
 import devConnectLogo from "/devconnectlogo.png";
+
+import { useForm } from "react-hook-form";
+import useLogin from "../../hooks/use-login";
 const LoginForm = () => {
-  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleLogin = (formData) => {
+    const response = useLogin(formData);
+    console.log(response);
+  };
+  // const navigate = useNavigate();
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -33,30 +46,41 @@ const LoginForm = () => {
         </Typography>
         <Box sx={{ mt: 1 }}>
           <TextField
-            margin="normal"
-            required
+            {...register("username", {
+              required: "Username is required",
+              minLength: {
+                value: 3,
+                message: "Username must be at least 3 characters",
+              },
+            })}
             fullWidth
             label="Username"
             autoFocus
+            error={errors?.username}
+            helperText={errors?.username?.message}
           />
           <TextField
+            {...register("password", {
+              required: "Enter your password",
+            })}
             margin="normal"
             required
             fullWidth
             name="password"
             label="Password"
             type="password"
+            error={errors?.password}
+            helperText={errors?.password?.message}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={() => navigate("/home")}
+            onClick={handleSubmit(handleLogin)}
           >
             Sign In
           </Button>
