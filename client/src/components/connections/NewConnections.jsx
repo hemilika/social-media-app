@@ -65,10 +65,12 @@ const NewConnections = ({ loading, suggestions }) => {
                           </Stack>
                         </Typography>
                       </Stack>
-                      <ButtonGroup sx={{ height: "30px", width: "160px" }}>
-                        <Button color="error">Ignore</Button>
-                        <Button>Connect</Button>
-                      </ButtonGroup>
+                      <Stack sx={{ ml: "30px" }}>
+                        <Button color="error" variant="outlined" size="small">
+                          Ignore
+                        </Button>
+                        <Button size="small">Connect</Button>
+                      </Stack>
                     </Stack>
                   }
                   avatar={

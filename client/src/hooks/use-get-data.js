@@ -2,7 +2,6 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 const useGetData = (endpoint) => {
-  console.log(endpoint);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +24,6 @@ const useGetData = (endpoint) => {
     fetchData();
   }, []);
 
-  console.log(data);
   return { data, loading };
 };
 

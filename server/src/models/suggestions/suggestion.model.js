@@ -1,9 +1,9 @@
 const { getConnections } = require("../connections/connections.model");
-const { getUsers } = require("../users/users.model");
+const { getLoggedInUser } = require("../users/users.model");
 
 const getSuggestions = async () => {
   const connections = await getConnections();
-  const users = await getUsers();
+  const users = await getLoggedInUser();
 
   const connectedUsernames = connections.map(
     (connection) => connection.username

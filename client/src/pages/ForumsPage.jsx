@@ -10,8 +10,6 @@ const ForumsPage = () => {
     "http://localhost:5000/forums"
   );
 
-  console.log("forums----", forums);
-
   return (
     <Grid container>
       <Grid item xs={2.5}>

@@ -6,6 +6,9 @@ import AddPost from "../components/home-page/AddPost";
 import useGetData from "../hooks/use-get-data";
 
 const HomePage = () => {
+  const { data: user, loading: loadingUser } = useGetData(
+    "http://localhost:5000/users"
+  );
   const { data: posts, loading } = useGetData("http://localhost:5000/posts");
 
   return (
@@ -20,11 +23,15 @@ const HomePage = () => {
           height: "100vh",
         }}
       >
-        <ProfileContent />
+        <ProfileContent user={user[0]} loading={loadingUser} />
       </Grid>
       <Grid item xs={7.2} style={{ paddingLeft: "2%" }}>
-        <AddPost />
-        <MainContent posts={posts} loading={loading} />
+        <AddPost profile={user[0]?.profilePicture} />
+        <MainContent
+          posts={posts}
+          loading={loading}
+          profile={user[0]?.profilePicture}
+        />
       </Grid>
       <Grid
         item

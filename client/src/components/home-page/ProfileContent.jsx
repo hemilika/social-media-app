@@ -8,22 +8,23 @@ import {
   Stack,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import panda from "../../assets/panda.webp";
 
-const ProfileContent = () => {
+const ProfileContent = ({ user, loading }) => {
   const navigate = useNavigate();
 
+  if (loading) return <div>Loading...</div>;
   return (
     <Stack spacing={5}>
       <Card>
         <CardHeader
           avatar={
-            <Avatar sx={{ border: "1px solid black" }}>
-              <img src={panda} alt="Logo" width="100" height="100" />
-            </Avatar>
+            <Avatar
+              sx={{ border: "1px solid black" }}
+              src={user.profilePicture}
+            />
           }
-          title="Hemi Lika"
-          subheader="Software Developer"
+          title={user.fullName}
+          subheader={user.jobField}
         ></CardHeader>
         <Divider variant="fullWidth" />
         <CardContent>
@@ -38,7 +39,7 @@ const ProfileContent = () => {
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate("/account")}
               >
-                hemibobi11@gmail.com
+                {user.email}
               </Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row" spacing={5}>
@@ -51,7 +52,7 @@ const ProfileContent = () => {
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate("/account")}
               >
-                hemi11
+                {user.username}
               </Typography>
             </Stack>
           </Stack>
@@ -67,7 +68,7 @@ const ProfileContent = () => {
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate("/connections")}
               >
-                17
+                {`${user.connections} connections`}
               </Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">
@@ -92,7 +93,7 @@ const ProfileContent = () => {
               <Typography variant="body2" color="text.secondary">
                 Job Field
               </Typography>
-              <Typography variant="body2">FullStack Developer</Typography>
+              <Typography variant="body2">{user.jobField}</Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row" spacing={5}>
               <Typography variant="body2" color="text.secondary">
@@ -107,22 +108,22 @@ const ProfileContent = () => {
               <Typography variant="body2" color="text.secondary">
                 Education
               </Typography>
-              <Typography variant="body2">UET</Typography>
+              <Typography variant="body2">{user.education}</Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">
               <Typography variant="body2" color="text.secondary">
                 Degree
               </Typography>
-              <Typography variant="body2">Bachelor</Typography>
+              <Typography variant="body2">{user.degree}</Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">
               <Typography variant="body2" color="text.secondary">
                 Interests
               </Typography>
               <Stack alignItems="flex-end">
-                <Typography variant="body2">NodeJS</Typography>
-                <Typography variant="body2">Backend Architecture</Typography>
-                <Typography variant="body2">Advanced React</Typography>
+                {user.interests.map((interest) => {
+                  return <Typography variant="body2">{interest}</Typography>;
+                })}
               </Stack>
             </Stack>
           </Stack>

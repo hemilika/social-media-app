@@ -1,11 +1,16 @@
-const users = require("./users.mongo");
+const user = require("./users.mongo");
 
-const getUsers = async () => {
+const getLoggedInUser = async (id) => {
+  let loggedUser = {};
   try {
-    const allUsers = users.find();
-    return allUsers;
+    if (id) {
+      loggedUser = user.find({ _id: id });
+    } else {
+      loggedUser = user.find();
+    }
+    return loggedUser;
   } catch (err) {
     console.log(err);
   }
 };
-module.exports = { getUsers };
+module.exports = { getLoggedInUser };

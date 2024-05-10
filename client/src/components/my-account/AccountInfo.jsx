@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const AccountInfo = () => {
+const AccountInfo = ({ user }) => {
   return (
     <Stack spacing={1}>
       <Typography variant="h6">Account</Typography>
@@ -18,7 +18,10 @@ const AccountInfo = () => {
       <Divider />
       <Stack direction="row" justifyContent="space-between" paddingTop="10px">
         <Stack direction="row" spacing={4} alignItems="center">
-          <Avatar sx={{ width: "80px", height: "80px" }} />
+          <Avatar
+            sx={{ width: "80px", height: "80px" }}
+            src={user.profilePicture}
+          />
           <Stack>
             <Typography variant="h6">Profile Picture</Typography>
             <Typography variant="subtitle2" color="GrayText">
@@ -46,8 +49,16 @@ const AccountInfo = () => {
       <Stack>
         <Typography variant="h6">Full Name</Typography>
         <Stack direction="row" justifyContent="space-between" paddingTop="10px">
-          <TextField label="First Name" sx={{ width: "400px" }} />
-          <TextField label="Last Name" sx={{ width: "400px" }} />
+          <TextField
+            label="First Name"
+            sx={{ width: "400px" }}
+            defaultValue={user.fullName.split(" ")[0]}
+          />
+          <TextField
+            label="Last Name"
+            sx={{ width: "400px" }}
+            defaultValue={user.fullName.split(" ")[1]}
+          />
         </Stack>
       </Stack>
       <Divider sx={{ paddingTop: "15px" }} />

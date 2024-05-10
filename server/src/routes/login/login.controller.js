@@ -18,7 +18,6 @@ const registerController = async (req, res) => {
 };
 
 const loginController = async (req, res) => {
-  console.log(req);
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });

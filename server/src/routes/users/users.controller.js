@@ -1,8 +1,8 @@
-const { getUsers } = require("../../models/users/users.model");
+const { getLoggedInUser } = require("../../models/users/users.model");
 
-const getAllUsers = async (req, res) => {
-  const data = await getUsers();
+const getUser = async (req, res) => {
+  const data = await getLoggedInUser(req.userId);
   return res.status(200).json(data);
 };
 
-module.exports = { getAllUsers };
+module.exports = { getUser };

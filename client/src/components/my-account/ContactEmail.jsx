@@ -1,4 +1,4 @@
-import { AddCircle, Email } from "@mui/icons-material";
+import { ChangeCircle, Email } from "@mui/icons-material";
 import {
   Button,
   Divider,
@@ -7,9 +7,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
 
-const ContactEmail = () => {
+const ContactEmail = ({ user }) => {
   return (
     <Stack spacing={1}>
       <Typography variant="h6">Contact Email</Typography>
@@ -26,6 +25,7 @@ const ContactEmail = () => {
           sx={{ mt: "5px", mb: "15px" }}
           type="email"
           label="Email"
+          defaultValue={user.email}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -35,13 +35,13 @@ const ContactEmail = () => {
           }}
         />
         <Button
-          startIcon={<AddCircle color="primary" />}
+          startIcon={<ChangeCircle color="primary" />}
           variant="contained"
           color="inherit"
           sx={{ height: "40px" }}
         >
           <Typography color="grey" variant="button">
-            Add another email
+            Change Contact Email
           </Typography>
         </Button>
       </Stack>

@@ -8,14 +8,15 @@ import {
   Typography,
 } from "@mui/material";
 import { PermMedia } from "@mui/icons-material";
-import panda from "../../assets/panda.webp";
-const AddPost = () => {
+
+const AddPost = ({ profile }) => {
   return (
     <Card sx={{ mt: "10px", padding: "10px" }}>
       <Stack direction="row" spacing={1} alignItems="center">
-        <Avatar sx={{ border: "1px solid black" }}>
-          <img src={panda} alt="" width="100" height="100" />
-        </Avatar>
+        <Avatar
+          src={profile}
+          sx={{ border: "2px solid", width: "50px", height: "50px" }}
+        />
         <TextField
           placeholder="Post something"
           fullWidth
