@@ -9,8 +9,25 @@ import Container from "@mui/material/Container";
 import { useNavigate, Link } from "react-router-dom";
 import devConnectLogo from "/devconnectlogo.png";
 
+import useRegister from "../../hooks/use-register";
+
+import { useForm } from "react-hook-form";
+
 const SignUpForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const navigate = useNavigate();
+
+  const handleSignUp = async (formData) => {
+    const { response, error } = await useRegister(formData);
+    if (response.status === 201) {
+      navigate("/login");
+    }
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -31,35 +48,46 @@ const SignUpForm = () => {
         </Typography>
         <Box sx={{ mt: 1 }}>
           <TextField
+            {...register("fullName", { required: "Enter your full name" })}
             margin="normal"
-            required
+            fullWidth
+            label="Full Name"
+            autoFocus
+            error={errors?.fullName}
+            helperText={errors?.fullName?.message}
+          />
+          <TextField
+            {...register("email", { required: "Enter a valid email address" })}
+            type="email"
+            margin="normal"
             fullWidth
             label="Email address"
             autoFocus
+            error={errors?.email}
+            helperText={errors?.email?.message}
           />
-          <TextField margin="normal" required fullWidth label="Username" />
           <TextField
             margin="normal"
-            required
             fullWidth
-            name="password"
+            label="Username"
+            {...register("username", { required: "Enter a username" })}
+            error={errors?.username}
+            helperText={errors?.username?.message}
+          />
+          <TextField
+            {...register("password", { required: "Enter a password" })}
+            margin="normal"
+            fullWidth
             label="Password"
             type="password"
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Retype Password"
-            type="password"
+            error={errors?.password}
+            helperText={errors?.password?.message}
           />
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={() => navigate("/home")}
+            onClick={handleSubmit(handleSignUp)}
           >
             Register
           </Button>

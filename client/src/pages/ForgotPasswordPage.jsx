@@ -4,7 +4,7 @@ import devconnectbackground from "/devconnectbackground.jpg";
 const ForgotPasswordPage = () => {
   return (
     <Stack direction="row" alignItems="center">
-      <img src={devconnectbackground} />
+      <img src={devconnectbackground} height="730" width="800px" />
       <ForgotPasswordForm />
     </Stack>
   );

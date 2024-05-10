@@ -32,7 +32,7 @@ const YourConnections = ({ connections }) => {
               <CardHeader
                 title={<NameUsername user={connection} />}
                 subheader={`${connection.connections} connections`}
-                avatar={<Avatar src={connection.profilePicture} />}
+                avatar={<Avatar src={connection?.profilePicture} />}
               />
             </Card>
           );

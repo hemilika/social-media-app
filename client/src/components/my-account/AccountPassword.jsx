@@ -1,8 +1,8 @@
-import { Lock, Security, ViewArray, Visibility } from "@mui/icons-material";
+import { Lock, Visibility } from "@mui/icons-material";
 import { InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
-const AccountPassword = ({ user }) => {
+const AccountPassword = () => {
   const [currentVisiblePassword, setCurrentVisiblePassword] = useState(false);
   const [newVisiblePassword, setNewVisiblePassword] = useState(false);
 

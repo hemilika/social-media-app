@@ -75,7 +75,7 @@ const NewConnections = ({ loading, suggestions }) => {
                   }
                   avatar={
                     <Avatar
-                      src={connection.profilePicture}
+                      src={connection?.profilePicture}
                       sx={{ width: "60px", height: "60px" }}
                     />
                   }

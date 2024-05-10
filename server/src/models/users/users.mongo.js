@@ -15,9 +15,14 @@ const usersSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+    unique: true,
     required: true,
   },
   email: {
+    type: String,
+    required: true,
+  },
+  password: {
     type: String,
     required: true,
   },
@@ -26,7 +31,7 @@ const usersSchema = new mongoose.Schema({
     required: false,
   },
   forums: {
-    type: String,
+    type: [String],
     required: false,
   },
   jobField: {
@@ -46,7 +51,7 @@ const usersSchema = new mongoose.Schema({
     required: false,
   },
   interests: {
-    type: [String],
+    type: [Object],
     required: false,
   },
 });

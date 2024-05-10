@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const ContactEmail = ({ user }) => {
+const ContactEmail = ({ user, register }) => {
   return (
     <Stack spacing={1}>
       <Typography variant="h6">Contact Email</Typography>
@@ -22,6 +22,7 @@ const ContactEmail = ({ user }) => {
         alignItems="center"
       >
         <TextField
+          {...register("email")}
           sx={{ mt: "5px", mb: "15px" }}
           type="email"
           label="Email"

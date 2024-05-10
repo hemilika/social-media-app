@@ -25,7 +25,7 @@ const MainContent = ({ posts, loading, profile }) => {
         return (
           <Card key={post._id} sx={{ marginTop: "2%" }}>
             <CardHeader
-              avatar={<Avatar src={post.profilePicture} />}
+              avatar={<Avatar src={post?.profilePicture} />}
               title={post.posterUsername}
               subheader={<DatePosted date={post.datePosted} />}
             />

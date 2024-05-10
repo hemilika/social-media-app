@@ -7,12 +7,26 @@ const secretKey = process.env.SECRET_KEY;
 
 const registerController = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, username, password, fullName, dateJoined } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hashedPassword });
+    const user = new User({
+      email,
+      username,
+      password: hashedPassword,
+      fullName,
+      dateJoined,
+      profilePicture: "",
+      connections: 0,
+      forums: [],
+      jobField: "",
+      experience: 0,
+      degree: "",
+      interests: [],
+    });
     await user.save();
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Registration failed" });
   }
 };

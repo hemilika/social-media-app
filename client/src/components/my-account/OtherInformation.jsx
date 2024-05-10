@@ -1,7 +1,20 @@
-import { Stack, TextField, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Stack, TextField, Typography, Autocomplete } from "@mui/material";
+import { interests } from "./interests";
+const OtherInformation = ({ user, register, setValue }) => {
+  const [selectedInterests, setSelectedInterests] = useState([]);
 
-const OtherInformation = ({ user }) => {
-  console.log(user);
+  const handleInterestsChange = (event, newValue) => {
+    setSelectedInterests(newValue);
+    setValue("interests", newValue);
+  };
+
+  useEffect(() => {
+    if (user.interests) {
+      setSelectedInterests(user.interests);
+    }
+  }, []);
+
   return (
     <>
       <Typography variant="h6" sx={{ mt: "5px", mb: "10px" }}>
@@ -13,11 +26,13 @@ const OtherInformation = ({ user }) => {
       <Stack spacing={3}>
         <Stack direction="row" justifyContent="space-between">
           <TextField
+            {...register("education")}
             label="Education"
             sx={{ width: "500px" }}
             defaultValue={user.education}
           />
           <TextField
+            {...register("jobField")}
             label="Job Field"
             sx={{ width: "500px" }}
             defaultValue={user.jobField}
@@ -25,17 +40,29 @@ const OtherInformation = ({ user }) => {
         </Stack>
         <Stack direction="row" justifyContent="space-between">
           <TextField
+            {...register("experience")}
             type="number"
             label="Experience"
             sx={{ width: "500px" }}
             defaultValue={user.experience}
           />
           <TextField
+            {...register("degree")}
             label="Degree"
             sx={{ width: "500px" }}
             defaultValue={user.degree}
           />
         </Stack>
+        <Autocomplete
+          {...register("interests")}
+          multiple
+          disablePortal
+          options={interests}
+          value={selectedInterests}
+          onChange={handleInterestsChange}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Interests" />}
+        />
       </Stack>
     </>
   );

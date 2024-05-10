@@ -13,6 +13,7 @@ const ProfileContent = ({ user, loading }) => {
   const navigate = useNavigate();
 
   if (loading) return <div>Loading...</div>;
+
   return (
     <Stack spacing={5}>
       <Card>
@@ -20,7 +21,7 @@ const ProfileContent = ({ user, loading }) => {
           avatar={
             <Avatar
               sx={{ border: "1px solid black" }}
-              src={user.profilePicture}
+              src={user?.profilePicture}
             />
           }
           title={user.fullName}
@@ -122,7 +123,9 @@ const ProfileContent = ({ user, loading }) => {
               </Typography>
               <Stack alignItems="flex-end">
                 {user.interests.map((interest) => {
-                  return <Typography variant="body2">{interest}</Typography>;
+                  return (
+                    <Typography variant="body2">{interest.label}</Typography>
+                  );
                 })}
               </Stack>
             </Stack>
