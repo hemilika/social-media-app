@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const useGetPosts = () => {
-  const [posts, setPosts] = useState([]);
+const useGetData = (endpoint) => {
+  console.log(endpoint);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const headerToken = {
@@ -12,11 +13,8 @@ const useGetPosts = () => {
   };
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/posts",
-        headerToken
-      );
-      setPosts(response.data);
+      const response = await axios.get(endpoint, headerToken);
+      setData(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -27,7 +25,8 @@ const useGetPosts = () => {
     fetchData();
   }, []);
 
-  return { posts, loading };
+  console.log(data);
+  return { data, loading };
 };
 
-export default useGetPosts;
+export default useGetData;

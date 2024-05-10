@@ -1,12 +1,15 @@
 import { Grid } from "@mui/material";
 import YourConnections from "../components/connections/YourConnections";
 import NewConnections from "../components/connections/NewConnections";
-import useGetConnections from "../hooks/use-get-connections";
-import useGetSuggestions from "../hooks/use-get-suggestions";
+import useGetData from "../hooks/use-get-data";
 
 const ConnectionsPage = () => {
-  const { loading, connections } = useGetConnections();
-  const { loading: loadingSuggestions, suggestions } = useGetSuggestions();
+  const { loading, data: connections } = useGetData(
+    "http://localhost:5000/connections"
+  );
+  const { loading: loadingSuggestions, data: suggestions } = useGetData(
+    "http://localhost:5000/suggestions"
+  );
 
   if (loading) return <div>Loading Connections...</div>;
   return (

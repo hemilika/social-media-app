@@ -14,18 +14,30 @@ import devConnectLogo from "/devconnectlogo.png";
 
 import { useForm } from "react-hook-form";
 import useLogin from "../../hooks/use-login";
+import { useState } from "react";
+
 const LoginForm = () => {
+  const [loginError, setLoginError] = useState();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (formData) => {
-    const response = useLogin(formData);
-    console.log(response);
+  const handleLogin = async (formData) => {
+    const { response, error } = await useLogin(formData);
+    if (error) {
+      if (error.response.status === 401) {
+        setLoginError("Username or password incorrect");
+      }
+    }
+    if (response.status === 200) {
+      setLoginError();
+      navigate("/home");
+    }
   };
-  // const navigate = useNavigate();
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,8 +68,8 @@ const LoginForm = () => {
             fullWidth
             label="Username"
             autoFocus
-            error={errors?.username}
-            helperText={errors?.username?.message}
+            error={errors?.username || loginError}
+            helperText={errors?.username?.message || loginError}
           />
           <TextField
             {...register("password", {

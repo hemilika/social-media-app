@@ -46,7 +46,13 @@ const DrawerList = ({ onClose }) => {
               ))}
           </List>
         </Stack>
-        <Button endIcon={<Logout />} onClick={() => navigate("/login")}>
+        <Button
+          endIcon={<Logout />}
+          onClick={() => {
+            localStorage.removeItem("token");
+            navigate("/login");
+          }}
+        >
           Logout
         </Button>
       </Stack>

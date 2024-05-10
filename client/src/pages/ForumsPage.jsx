@@ -3,10 +3,14 @@ import React from "react";
 import MyForums from "../components/forum/MyForums";
 import ForumsContent from "../components/home-page/ForumsContent";
 import MainContentForums from "../components/forum/MainContentForums";
-import useGetForums from "../hooks/use-get-forums";
+import useGetData from "../hooks/use-get-data";
 
 const ForumsPage = () => {
-  const { forums, loading: loadingForums } = useGetForums();
+  const { data: forums, loading: loadingForums } = useGetData(
+    "http://localhost:5000/forums"
+  );
+
+  console.log("forums----", forums);
 
   return (
     <Grid container>

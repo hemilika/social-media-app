@@ -1,10 +1,17 @@
 import axios from "axios";
 
 const useLogin = async (props) => {
-  console.log(props);
-  const response = await axios.post("http://localhost:5000/login");
-  console.log(response);
-  return response;
+  try {
+    const response = await axios.post("http://localhost:5000/login", {
+      username: props.username,
+      password: props.password,
+    });
+    localStorage.setItem("token", response.data.token);
+    return { response };
+  } catch (error) {
+    console.log(error);
+    return { error };
+  }
 };
 
 export default useLogin;

@@ -3,12 +3,10 @@ import ProfileContent from "../components/home-page/ProfileContent";
 import ForumsContent from "../components/home-page/ForumsContent";
 import MainContent from "../components/home-page/MainContent";
 import AddPost from "../components/home-page/AddPost";
-import useGetPosts from "../hooks/use-get-posts";
-import useGetForums from "../hooks/use-get-forums";
+import useGetData from "../hooks/use-get-data";
 
 const HomePage = () => {
-  const { posts, loading } = useGetPosts();
-  const { forums, loading: loadingForums } = useGetForums();
+  const { data: posts, loading } = useGetData("http://localhost:5000/posts");
 
   return (
     <Grid container>
@@ -33,7 +31,7 @@ const HomePage = () => {
         xs={2.5}
         style={{ position: "absolute", top: 80, right: 20, height: "100vh" }}
       >
-        <ForumsContent forums={forums} loading={loadingForums} />
+        <ForumsContent />
       </Grid>
     </Grid>
   );

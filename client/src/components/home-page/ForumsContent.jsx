@@ -1,7 +1,10 @@
 import React from "react";
 import { Button, Card, CardHeader, Stack, Typography } from "@mui/material";
 import { ArrowRightAlt, Visibility } from "@mui/icons-material";
-const ForumsContent = ({ loading, forums }) => {
+import useGetData from "../../hooks/use-get-data";
+
+const ForumsContent = () => {
+  const { data: forums, loading } = useGetData("http://localhost:5000/forums");
   if (loading) return <div>Loading Forums...</div>;
   return (
     <Stack alignItems="center">

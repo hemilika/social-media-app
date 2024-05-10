@@ -18,6 +18,7 @@ const registerController = async (req, res) => {
 };
 
 const loginController = async (req, res) => {
+  console.log(req);
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -31,10 +32,8 @@ const loginController = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, secretKey, {
       expiresIn: "24h",
     });
-    localStorage.setItem("token", token);
     res.status(200).json({ token });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error });
   }
 };
