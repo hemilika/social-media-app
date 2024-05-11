@@ -10,11 +10,11 @@ const registerController = async (req, res) => {
     const { email, username, password, fullName, dateJoined } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
-      email,
-      username,
+      email: email,
+      username: username,
       password: hashedPassword,
-      fullName,
-      dateJoined,
+      fullName: fullName,
+      dateJoined: dateJoined,
       profilePicture: "",
       connections: 0,
       forums: [],

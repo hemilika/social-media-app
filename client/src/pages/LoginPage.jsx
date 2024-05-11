@@ -1,6 +1,7 @@
 import { Stack } from "@mui/material";
-import LoginForm from "../components/login/LoginForm";
 import devconnectbackground from "/devconnectbackground.jpg";
+import LoginForm from "../components/login/LoginForm";
+
 const LoginPage = () => {
   return (
     <Stack direction="row" alignItems="center">

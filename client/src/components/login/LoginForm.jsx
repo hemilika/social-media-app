@@ -15,6 +15,7 @@ import devConnectLogo from "/devconnectlogo.png";
 import { useForm } from "react-hook-form";
 import useLogin from "../../hooks/use-login";
 import { useState } from "react";
+import { Stack } from "@mui/material";
 
 const LoginForm = () => {
   const [loginError, setLoginError] = useState();
@@ -38,6 +39,7 @@ const LoginForm = () => {
       navigate("/home");
     }
   };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -81,7 +83,7 @@ const LoginForm = () => {
             name="password"
             label="Password"
             type="password"
-            error={errors?.password}
+            error={errors?.password || loginError}
             helperText={errors?.password?.message}
           />
           <FormControlLabel
@@ -96,14 +98,9 @@ const LoginForm = () => {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link to={"/forgot-password"}>Forgot password?</Link>
-            </Grid>
-            <Grid item>
-              <Link to={"/sign-up"}>Don't have an account? Sign Up</Link>
-            </Grid>
-          </Grid>
+          <Stack justifyContent="flex-end" direction="row">
+            <Link to={"/sign-up"}>Don't have an account? Sign Up</Link>
+          </Stack>
         </Box>
       </Box>
     </Container>

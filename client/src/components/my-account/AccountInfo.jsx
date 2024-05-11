@@ -38,7 +38,9 @@ const AccountInfo = ({ reset, user, register }) => {
             color="inherit"
             variant="contained"
             sx={{ background: "lightgrey" }}
-            onClick={() => reset({ profilePicture: "" })}
+            onClick={() => {
+              reset({ profilePicture: "" });
+            }}
           >
             <Typography color="GrayText" variant="button">
               Delete

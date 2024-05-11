@@ -25,7 +25,12 @@ const MyAccountPage = () => {
       <Grid item width="80%" padding="30px">
         <Stack spacing={4} alignItems="left">
           <Card sx={{ padding: "50px", borderRadius: "20px" }}>
-            <AccountInfo reset={reset} user={user[0]} register={register} />
+            <AccountInfo
+              reset={reset}
+              user={user[0]}
+              register={register}
+              isDirty={isDirty}
+            />
             <ContactEmail user={user[0]} register={register} />
             <OtherInformation
               user={user[0]}

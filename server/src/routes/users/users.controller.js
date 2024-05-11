@@ -8,7 +8,6 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const updatedData = req.body;
-  console.log(updatedData);
   try {
     const result = await User.findByIdAndUpdate(req.userId, updatedData, {
       new: true,

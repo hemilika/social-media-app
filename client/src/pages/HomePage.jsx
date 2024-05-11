@@ -26,12 +26,8 @@ const HomePage = () => {
         <ProfileContent user={user[0]} loading={loadingUser} />
       </Grid>
       <Grid item xs={7.2} style={{ paddingLeft: "2%" }}>
-        <AddPost profile={user[0]?.profilePicture} />
-        <MainContent
-          posts={posts}
-          loading={loading}
-          profile={user[0]?.profilePicture}
-        />
+        <AddPost user={user[0]} />
+        <MainContent posts={posts} loading={loading} user={user[0]} />
       </Grid>
       <Grid
         item

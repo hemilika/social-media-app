@@ -11,11 +11,18 @@ import {
   TextField,
   InputAdornment,
 } from "@mui/material";
-import { Comment, EmojiEmotions, Favorite, Textsms } from "@mui/icons-material";
+import {
+  Comment,
+  Delete,
+  EmojiEmotions,
+  Favorite,
+  Textsms,
+} from "@mui/icons-material";
 import LoadMore from "./LoadMore";
 import DatePosted from "./DatePosted";
 import Comments from "./Comments";
-const MainContent = ({ posts, loading, profile }) => {
+import PostHeader from "./PostHeader";
+const MainContent = ({ posts, loading, user }) => {
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -26,9 +33,10 @@ const MainContent = ({ posts, loading, profile }) => {
           <Card key={post._id} sx={{ marginTop: "2%" }}>
             <CardHeader
               avatar={<Avatar src={post?.profilePicture} />}
-              title={post.posterUsername}
+              title={<PostHeader post={post} user={user?.username} />}
               subheader={<DatePosted date={post.datePosted} />}
             />
+
             <Divider variant="middle" />
             <CardContent>
               <Stack>
@@ -41,13 +49,15 @@ const MainContent = ({ posts, loading, profile }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <CardContent sx={{ maxWidth: "700px", maxHeight: "500px" }}>
-                    <img
-                      src={post.media}
-                      alt="Couldn't load image"
-                      width="700px"
-                    />
-                  </CardContent>
+                  {post?.media && (
+                    <CardContent sx={{ maxWidth: "700px", maxHeight: "500px" }}>
+                      <img
+                        src={post?.media}
+                        alt="Couldn't load image"
+                        width="700px"
+                      />
+                    </CardContent>
+                  )}
                 </Card>
                 <Divider />
                 <Stack>
@@ -83,7 +93,7 @@ const MainContent = ({ posts, loading, profile }) => {
                     <Comments comments={post.comments} />
                   </Stack>
                   <Stack direction="row" alignItems="center" spacing={2}>
-                    <Avatar src={profile} />
+                    <Avatar src={user?.profilePicture} />
                     <TextField
                       fullWidth
                       placeholder="Add a comment..."

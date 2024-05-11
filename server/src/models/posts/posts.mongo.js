@@ -25,6 +25,10 @@ const postsSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  profilePicture: {
+    type: String,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("posts", postsSchema);

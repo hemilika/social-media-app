@@ -10,8 +10,8 @@ const forumsSchema = new mongoose.Schema({
     required: true,
   },
   forumMembers: {
-    type: Number,
-    required: true,
+    type: [String],
+    required: false,
   },
 });
 

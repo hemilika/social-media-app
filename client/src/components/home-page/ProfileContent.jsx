@@ -100,7 +100,7 @@ const ProfileContent = ({ user, loading }) => {
               <Typography variant="body2" color="text.secondary">
                 Experience
               </Typography>
-              <Typography variant="body2">5+ years</Typography>
+              <Typography variant="body2">{`${user.experience} years`}</Typography>
             </Stack>
           </Stack>
           <Divider sx={{ mt: "8px", mb: "8px" }} />
