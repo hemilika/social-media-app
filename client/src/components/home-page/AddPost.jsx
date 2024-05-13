@@ -12,11 +12,15 @@ import {
 import { PermMedia } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import useAddPost from "../../hooks/use-add-post";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CreateForumDialog from "./CreateForumDialog";
+import { AppContext } from "../../hooks/AppContext";
 
 const AddPost = ({ user }) => {
   const [openForumCreate, setOpenForumCreate] = useState(false);
+
+  const { optimisticUpdate } = useContext(AppContext);
+
   const { register, handleSubmit, reset } = useForm();
 
   const VisuallyHiddenInput = styled("input")({
@@ -31,7 +35,7 @@ const AddPost = ({ user }) => {
     width: 1,
   });
 
-  const handleAddPost = (formData) => {
+  const handleAddPost = async (formData) => {
     const currentDate = new Date(Date.now())
       .toISOString()
       .replace("Z", "+00:00");
@@ -42,7 +46,10 @@ const AddPost = ({ user }) => {
       media: formData.media || "",
       datePosted: currentDate,
     };
-    useAddPost(postData);
+    const { response } = await useAddPost(postData);
+    if (response?.data) {
+      optimisticUpdate({ post: response?.data });
+    }
     reset({ description: "" });
   };
   return (

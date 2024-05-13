@@ -22,7 +22,7 @@ const addPost = async (req, res) => {
     });
 
     await post.save();
-    return res.status(201).json({ message: "Post added successfully" });
+    return res.status(201).json(post);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Couldn't add post" });
@@ -31,7 +31,7 @@ const addPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
 
     if (!id) {
       return res.status(400).json({ message: "Invalid ID provided" });

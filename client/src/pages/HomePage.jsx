@@ -4,12 +4,21 @@ import ForumsContent from "../components/home-page/ForumsContent";
 import MainContent from "../components/home-page/MainContent";
 import AddPost from "../components/home-page/AddPost";
 import useGetData from "../hooks/use-get-data";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "../hooks/AppContext";
 
 const HomePage = () => {
+  const { posts, setPosts } = useContext(AppContext);
   const { data: user, loading: loadingUser } = useGetData(
     "http://localhost:5000/users"
   );
-  const { data: posts, loading } = useGetData("http://localhost:5000/posts");
+  const { data: postsData, loading } = useGetData(
+    "http://localhost:5000/posts"
+  );
+
+  useEffect(() => {
+    if (postsData) setPosts(postsData);
+  }, [postsData]);
 
   return (
     <Grid container>

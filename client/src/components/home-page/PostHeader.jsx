@@ -2,12 +2,17 @@ import { Delete } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
 import useDeletePost from "../../hooks/use-delete-post";
 import DeletePostDialog from "./DeletePostDialog";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../hooks/AppContext";
 
 const PostHeader = ({ post, user }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+  const { optimisticUpdate } = useContext(AppContext);
   const handleDeletePost = () => {
     useDeletePost(post._id);
+    setOpenDeleteDialog(false);
+    optimisticUpdate({ id: post._id, isDeleted: true });
   };
   return (
     <Stack direction="row" justifyContent="space-between">
