@@ -1,7 +1,7 @@
 import { Typography, AppBar, Toolbar, Stack, IconButton } from "@mui/material";
 import NavRightContent from "./NavRightContent";
 import SearchBar from "./SearchBar";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import devconnect from "/devconnectlogo.png";
 import { useState } from "react";
 import LeftDrawer from "./LeftDrawer";

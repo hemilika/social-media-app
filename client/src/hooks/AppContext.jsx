@@ -22,7 +22,7 @@ export const AppProvider = ({ children }) => {
     },
     {
       navigationPath: "/forums",
-      contentName: "Forum",
+      contentName: "Forums",
       icon: <ForumIcon />,
     },
     {

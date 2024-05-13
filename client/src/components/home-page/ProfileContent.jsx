@@ -79,6 +79,7 @@ const ProfileContent = ({ user, loading }) => {
               <Typography
                 variant="body2"
                 color="primary"
+                onClick={() => navigate("/forums")}
                 sx={{ cursor: "pointer" }}
               >
                 2
