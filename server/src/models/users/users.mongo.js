@@ -26,10 +26,6 @@ const usersSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  connections: {
-    type: Number,
-    required: false,
-  },
   forums: {
     type: [String],
     required: false,
@@ -51,6 +47,10 @@ const usersSchema = new mongoose.Schema({
     required: false,
   },
   interests: {
+    type: [Object],
+    required: false,
+  },
+  connections: {
     type: [Object],
     required: false,
   },

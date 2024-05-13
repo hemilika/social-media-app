@@ -13,4 +13,15 @@ const getLoggedInUser = async (id) => {
     console.log(err);
   }
 };
-module.exports = { getLoggedInUser };
+const getUserConnections = async (id) => {
+  let loggedUser = {};
+  try {
+    if (id) {
+      loggedUser = user.find({ _id: id }).select("connections");
+    }
+    return loggedUser;
+  } catch (err) {
+    console.log(err);
+  }
+};
+module.exports = { getLoggedInUser, getUserConnections };

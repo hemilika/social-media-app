@@ -69,7 +69,7 @@ const ProfileContent = ({ user, loading }) => {
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate("/connections")}
               >
-                {`${user.connections} connections`}
+                {`${user.connections.length} connections`}
               </Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">

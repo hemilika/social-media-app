@@ -1,4 +1,4 @@
-import { Agriculture, ArrowDownward } from "@mui/icons-material";
+import { ArrowDownward } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -19,6 +19,7 @@ export const NameUsername = ({ user }) => {
   );
 };
 const YourConnections = ({ connections }) => {
+  console.log(connections[0]);
   return (
     <Stack width="300px" marginTop="4px">
       <Typography>Your Connections</Typography>

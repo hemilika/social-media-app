@@ -12,8 +12,10 @@ import devConnectLogo from "/devconnectlogo.png";
 import useRegister from "../../hooks/use-register";
 
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const SignUpForm = () => {
+  const [registerError, setRegisterError] = useState();
   const {
     register,
     handleSubmit,
@@ -26,6 +28,9 @@ const SignUpForm = () => {
     const { response, error } = await useRegister(formData);
     if (response.status === 201) {
       navigate("/login");
+    }
+    if (error) {
+      setRegisterError("A problem has occurred, please try again");
     }
   };
   return (
@@ -53,8 +58,8 @@ const SignUpForm = () => {
             fullWidth
             label="Full Name"
             autoFocus
-            error={errors?.fullName}
-            helperText={errors?.fullName?.message}
+            error={errors?.fullName || registerError}
+            helperText={errors?.fullName?.message || registerError}
           />
           <TextField
             {...register("email", { required: "Enter a valid email address" })}

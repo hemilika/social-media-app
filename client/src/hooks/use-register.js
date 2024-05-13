@@ -12,7 +12,8 @@ export function getCurrentDate() {
 const useRegister = async (props) => {
   try {
     const currentDate = getCurrentDate();
-    const dateJoined = new Date(currentDate);
+    const [day, month, year] = currentDate.split("/").map(Number);
+    const dateJoined = new Date(year, month - 1, day);
     const response = await axios.post("http://localhost:5000/register", {
       fullName: props.fullName,
       email: props.email,

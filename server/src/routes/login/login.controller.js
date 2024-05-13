@@ -10,18 +10,19 @@ const registerController = async (req, res) => {
     const { email, username, password, fullName, dateJoined } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({
-      email: email,
-      username: username,
-      password: hashedPassword,
       fullName: fullName,
       dateJoined: dateJoined,
       profilePicture: "",
-      connections: 0,
+      username: username,
+      email: email,
+      password: hashedPassword,
       forums: [],
       jobField: "",
       experience: 0,
+      education: "",
       degree: "",
       interests: [],
+      connections: [],
     });
     await user.save();
     res.status(201).json({ message: "User registered successfully" });
