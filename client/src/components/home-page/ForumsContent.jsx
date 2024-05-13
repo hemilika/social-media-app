@@ -1,24 +1,30 @@
 import React from "react";
 import { Button, Card, CardHeader, Stack, Typography } from "@mui/material";
-import { dummyForums } from "../../dummy-data/dummyData";
 import { ArrowRightAlt, Visibility } from "@mui/icons-material";
+import useGetData from "../../hooks/use-get-data";
+
 const ForumsContent = () => {
+  const { data: forums, loading } = useGetData("http://localhost:5000/forums");
+  if (loading) return <div>Loading Forums...</div>;
   return (
     <Stack alignItems="center">
       <Card>
         <Typography variant="subtitle1" sx={{ ml: "25%" }}>
           Explore Forums
         </Typography>
-        {dummyForums.map((forum, index) => {
+        {forums.map((forum, index) => {
           return (
             <Card sx={{ borderRadius: "0" }} key={index}>
-              <CardHeader title={forum.name} subheader={forum.description} />
+              <CardHeader
+                title={forum.forumName}
+                subheader={forum.forumDescription}
+              />
               <Typography
                 variant="subtitle2"
                 color="GrayText"
                 sx={{ marginLeft: "18px", marginTop: "-10px" }}
               >
-                Members: 54
+                Members: {forum.forumMembers}
               </Typography>
               <Stack
                 direction="row"

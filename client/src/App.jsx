@@ -4,13 +4,17 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
+
 import Navbar from "./components/navbar/Navbar";
 import HomePage from "./pages/HomePage";
 import ConnectionsPage from "./pages/ConnectionsPage";
-import "./pageStyle.css";
 import ForumsPage from "./pages/ForumsPage";
 import MyAccountPage from "./pages/MyAccountPage";
 import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+
+import "./pageStyle.css";
 
 const App = () => {
   return (
@@ -18,6 +22,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/" element={<Navbar />}>
           <Route path="/home" element={<HomePage />} />
           <Route path="/connections" element={<ConnectionsPage />} />

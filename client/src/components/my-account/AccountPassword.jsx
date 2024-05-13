@@ -1,7 +1,11 @@
-import { Lock, Security, ViewArray, Visibility } from "@mui/icons-material";
+import { Lock, Visibility } from "@mui/icons-material";
 import { InputAdornment, Stack, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 
 const AccountPassword = () => {
+  const [currentVisiblePassword, setCurrentVisiblePassword] = useState(false);
+  const [newVisiblePassword, setNewVisiblePassword] = useState(false);
+
   return (
     <Stack spacing={1}>
       <Typography variant="h6">Password</Typography>
@@ -11,7 +15,7 @@ const AccountPassword = () => {
       <Stack direction="row" justifyContent="space-between" paddingTop="10px">
         <TextField
           label="Current Password"
-          type="password"
+          type={currentVisiblePassword ? "text" : "password"}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -20,7 +24,12 @@ const AccountPassword = () => {
             ),
             endAdornment: (
               <InputAdornment position="end">
-                <Visibility />
+                <Visibility
+                  sx={{ cursor: "pointer" }}
+                  onClick={() =>
+                    setCurrentVisiblePassword(!currentVisiblePassword)
+                  }
+                />
               </InputAdornment>
             ),
           }}
@@ -28,7 +37,7 @@ const AccountPassword = () => {
         />
         <TextField
           label="New Password"
-          type="password"
+          type={newVisiblePassword ? "text" : "password"}
           sx={{ width: "500px" }}
           InputProps={{
             startAdornment: (
@@ -38,7 +47,10 @@ const AccountPassword = () => {
             ),
             endAdornment: (
               <InputAdornment position="end">
-                <Visibility />
+                <Visibility
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => setNewVisiblePassword(!newVisiblePassword)}
+                />
               </InputAdornment>
             ),
           }}

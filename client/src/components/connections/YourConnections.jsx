@@ -7,26 +7,32 @@ import {
   CardHeader,
   Typography,
 } from "@mui/material";
-import { yourConnections } from "../../dummy-data/dummyData";
-const YourConnections = () => {
+export const NameUsername = ({ user }) => {
+  return (
+    <Stack direction="row">
+      <Typography variant="subtitle2">{user.fullName}</Typography>
+      &nbsp;{" - "} &nbsp;
+      <Typography variant="subtitle2" fontWeight="bold">
+        {user.username}
+      </Typography>
+    </Stack>
+  );
+};
+const YourConnections = ({ connections }) => {
   return (
     <Stack width="300px" marginTop="4px">
       <Typography>Your Connections</Typography>
       <Stack spacing={2}>
-        {yourConnections.map((connection, index) => {
+        {connections.map((connection, index) => {
           return (
             <Card
               key={index}
               sx={{ border: "1px solid lightgrey", borderRadius: "10" }}
             >
               <CardHeader
-                title={connection.name}
-                subheader={connection.connections}
-                avatar={
-                  <Avatar>
-                    <Agriculture />
-                  </Avatar>
-                }
+                title={<NameUsername user={connection} />}
+                subheader={`${connection.connections} connections`}
+                avatar={<Avatar src={connection?.profilePicture} />}
               />
             </Card>
           );

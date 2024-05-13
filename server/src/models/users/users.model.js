@@ -1,8 +1,16 @@
-const users = require("./users.mongo");
-const axios = require("axios");
+const user = require("./users.mongo");
 
-const getUsers = async () => {
-  console.log("Getting users from database...");
-  return await users.findById();
+const getLoggedInUser = async (id) => {
+  let loggedUser = {};
+  try {
+    if (id) {
+      loggedUser = user.find({ _id: id });
+    } else {
+      loggedUser = user.find();
+    }
+    return loggedUser;
+  } catch (err) {
+    console.log(err);
+  }
 };
-module.exports = { users };
+module.exports = { getLoggedInUser };
