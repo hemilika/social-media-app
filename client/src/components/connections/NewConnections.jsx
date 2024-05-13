@@ -17,13 +17,29 @@ import {
   School,
 } from "@mui/icons-material";
 import { NameUsername } from "./YourConnections";
+import useAddConnection from "../../hooks/use-add-connection";
+import { useState } from "react";
 const NewConnections = ({ loading, suggestions }) => {
+  const [connectedMap, setConnectedMap] = useState({});
+
+  const handleAddConnection = async (connection, connectionId) => {
+    const { response, err } = await useAddConnection(connection);
+    if (response.status === 200) {
+      setConnectedMap((prevMap) => ({
+        ...prevMap,
+        [connectionId]: true,
+      }));
+    }
+  };
+
   if (loading) return <div>Loading suggestions...</div>;
   return (
     <>
       <Typography variant="subtitle1">New Connections Suggestions</Typography>
       <Grid container spacing={1}>
         {suggestions.map((connection, index) => {
+          const connectionId = connection._id.toString();
+          const isConnected = connectedMap[connectionId];
           return (
             <Grid item key={index} xs={12} md={6}>
               <Card>
@@ -65,11 +81,20 @@ const NewConnections = ({ loading, suggestions }) => {
                           </Stack>
                         </Typography>
                       </Stack>
+
                       <Stack sx={{ ml: "30px" }}>
-                        <Button color="error" variant="outlined" size="small">
-                          Ignore
-                        </Button>
-                        <Button size="small">Connect</Button>
+                        {isConnected ? (
+                          <Typography>Already Connected</Typography>
+                        ) : (
+                          <Button
+                            size="small"
+                            onClick={() =>
+                              handleAddConnection(connection, connection._id)
+                            }
+                          >
+                            Connect
+                          </Button>
+                        )}
                       </Stack>
                     </Stack>
                   }

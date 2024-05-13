@@ -61,7 +61,7 @@ const AddPost = ({ user }) => {
             sx={{ border: "2px solid", width: "50px", height: "50px" }}
           />
           <TextField
-            {...register("description")}
+            {...register("description", { required: true })}
             placeholder="Add something to your feed"
             fullWidth
             sx={{
@@ -78,7 +78,7 @@ const AddPost = ({ user }) => {
                   sx={{ cursor: "pointer" }}
                   onClick={handleSubmit(handleAddPost)}
                 >
-                  <PostAdd color="primary" />
+                  <Typography color="Highlight">POST</Typography>
                 </InputAdornment>
               ),
             }}
