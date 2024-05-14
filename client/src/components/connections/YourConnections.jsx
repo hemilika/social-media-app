@@ -23,7 +23,10 @@ const YourConnections = ({ connections }) => {
     <Stack width="300px" marginTop="4px">
       <Typography>Your Connections</Typography>
       {connections.length === 0 ? (
-        <p>You have no connections</p>
+        <div>
+          <p>You have no connections at the moment</p>
+          <p>New connections will appear here</p>
+        </div>
       ) : (
         <Stack spacing={2}>
           {connections.map((connection, index) => {
@@ -42,9 +45,13 @@ const YourConnections = ({ connections }) => {
           })}
         </Stack>
       )}
-      <Stack paddingTop="10px">
-        <Button endIcon={<ArrowDownward />}>Show More</Button>
-      </Stack>
+      {connections.length === 0 ? (
+        ""
+      ) : (
+        <Stack paddingTop="10px">
+          <Button endIcon={<ArrowDownward />}>Show More</Button>
+        </Stack>
+      )}
     </Stack>
   );
 };

@@ -12,6 +12,7 @@ import {
 import {
   ArrowDownward,
   Computer,
+  Done,
   Language,
   People,
   School,
@@ -38,7 +39,6 @@ const NewConnections = ({ loading, suggestions }) => {
       <Typography variant="subtitle1">New Connections Suggestions</Typography>
       <Grid container spacing={1}>
         {suggestions.map((connection, index) => {
-          console.log(connection);
           const connectionId = connection._id.toString();
           const isConnected = connectedMap[connectionId];
           return (
@@ -85,7 +85,14 @@ const NewConnections = ({ loading, suggestions }) => {
 
                       <Stack sx={{ ml: "30px" }}>
                         {isConnected ? (
-                          <Typography>Already Connected</Typography>
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={1}
+                          >
+                            <Typography>Connected</Typography>
+                            <Done />
+                          </Stack>
                         ) : (
                           <Button
                             size="small"

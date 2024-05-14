@@ -1,4 +1,5 @@
 const { getUserConnections } = require("../../models/users/users.model");
+const { getLoggedInUser } = require("../../models/users/users.model");
 const User = require("../../models/users/users.mongo");
 
 const getAllConnections = async (req, res) => {
@@ -7,6 +8,10 @@ const getAllConnections = async (req, res) => {
 };
 
 const addConnection = async (req, res) => {
+  const { userId } = req.body;
+  const loggedUserData = await getLoggedInUser(userId);
+  loggedUserData;
+  console.log(loggedUserData);
   const newConnection = req.body;
   try {
     const result = await User.findByIdAndUpdate(

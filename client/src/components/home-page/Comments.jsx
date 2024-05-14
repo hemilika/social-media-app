@@ -3,7 +3,7 @@ import React from "react";
 
 const Comments = ({ comments }) => {
   return (
-    <Stack>
+    <Stack marginBottom="5px">
       {comments.map((comment) => {
         return (
           <Stack direction="row" spacing={2} alignItems="center">

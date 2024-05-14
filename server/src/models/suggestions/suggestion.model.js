@@ -17,8 +17,6 @@ const getSuggestions = async (req) => {
     (user) => !connectedUsername.includes(user.username)
   );
 
-  console.log(suggestions);
-
   return suggestions;
 };
 

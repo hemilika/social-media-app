@@ -16,7 +16,7 @@ import DatePosted from "./DatePosted";
 import Comments from "./Comments";
 import PostHeader from "./PostHeader";
 import useLikePost, { useCommentPost } from "../../hooks/use-like-post";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AppContext } from "../../hooks/AppContext";
 
 const MainContent = ({ posts, loading, user }) => {
@@ -43,9 +43,11 @@ const MainContent = ({ posts, loading, user }) => {
       user: user.username,
     };
 
-    const { response } = await useCommentPost(postId, commentData);
-    if (response?.data) {
-      optimisticUpdate({ post: response?.data });
+    if (comment.length !== 0) {
+      const { response } = await useCommentPost(postId, commentData);
+      if (response?.data) {
+        optimisticUpdate({ post: response?.data });
+      }
     }
     setComment("");
   };
@@ -141,7 +143,7 @@ const MainContent = ({ posts, loading, user }) => {
                           <Button
                             onClick={() => commentPost(post._id, user, comment)}
                           >
-                            <Comment color="inherit" />
+                            ADD
                           </Button>
                         ),
                       }}
