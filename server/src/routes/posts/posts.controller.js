@@ -45,4 +45,40 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { getAllPosts, addPost, deletePost };
+const likePost = async (req, res) => {
+  try {
+    const { post } = req.body;
+    const { _id } = post;
+    const result = await Posts.findByIdAndUpdate(
+      _id,
+      { $inc: { likes: 1 } },
+      {
+        new: true,
+      }
+    );
+    return res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Couldn't like post" });
+  }
+};
+
+const commentPost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { comment } = req.body;
+    const result = await Posts.findByIdAndUpdate(
+      id,
+      { $push: { comments: comment } },
+      {
+        new: true,
+      }
+    );
+    return res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Couldn't comment on post" });
+  }
+};
+
+module.exports = { getAllPosts, addPost, deletePost, likePost, commentPost };

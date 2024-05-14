@@ -16,7 +16,7 @@ const PostHeader = ({ post, user }) => {
   };
   return (
     <Stack direction="row" justifyContent="space-between">
-      <Typography variant="subtitle2" sx={{ mt: "2px" }}>
+      <Typography variant="subtitle2" fontWeight="bold" sx={{ mt: "2px" }}>
         {post?.posterUsername}
       </Typography>
       {post?.posterUsername === user ? (

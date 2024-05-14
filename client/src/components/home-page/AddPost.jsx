@@ -15,14 +15,28 @@ import useAddPost from "../../hooks/use-add-post";
 import { useContext, useState } from "react";
 import CreateForumDialog from "./CreateForumDialog";
 import { AppContext } from "../../hooks/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = ({ user }) => {
   const [openForumCreate, setOpenForumCreate] = useState(false);
 
+  const navigate = useNavigate();
+
+  const [uploadedImage, setUploadedImage] = useState(null);
   const { optimisticUpdate } = useContext(AppContext);
 
   const { register, handleSubmit, reset } = useForm();
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setUploadedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -43,7 +57,7 @@ const AddPost = ({ user }) => {
       description: formData.description,
       posterUsername: user.username,
       profilePicture: user.profilePicture,
-      media: formData.media || "",
+      media: uploadedImage,
       datePosted: currentDate,
     };
     const { response } = await useAddPost(postData);
@@ -51,6 +65,7 @@ const AddPost = ({ user }) => {
       optimisticUpdate({ post: response?.data });
     }
     reset({ description: "" });
+    setUploadedImage(null);
   };
   return (
     <>
@@ -89,7 +104,11 @@ const AddPost = ({ user }) => {
             <Typography variant="button" color="black" fontFamily="unset">
               Media
             </Typography>
-            <VisuallyHiddenInput type="file" />
+            <VisuallyHiddenInput
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
           </Button>
           <Button
             startIcon={<Forum />}
@@ -99,12 +118,24 @@ const AddPost = ({ user }) => {
               Create a forum
             </Typography>
           </Button>
-          <Button startIcon={<EventNote />}>
+          <Button startIcon={<EventNote />} onClick={() => navigate("/forums")}>
             <Typography variant="button" color="black" fontFamily="unset">
               Post on a forum
             </Typography>
           </Button>
         </Stack>
+        {uploadedImage ? (
+          <Stack
+            padding={"20px"}
+            ml="10%"
+            justifyContent="center"
+            alignItems="center"
+            maxHeight={"400px"}
+            maxWidth={"800px"}
+          >
+            <img src={uploadedImage} alt="uploaded image" />
+          </Stack>
+        ) : null}
       </Card>
       <CreateForumDialog open={openForumCreate} setOpen={setOpenForumCreate} />
     </>

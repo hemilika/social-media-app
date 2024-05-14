@@ -1,8 +1,8 @@
-const connections = require("./connections.mongo");
+const users = require("../users/users.mongo");
 
 const getConnections = async () => {
   try {
-    const connectionsData = connections.find();
+    const connectionsData = users.find().exec();
     return connectionsData;
   } catch (err) {
     console.log(err);

@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const useDeletePost = async (id) => {
-  console.log(localStorage.getItem("token"));
   try {
     const response = await axios.delete(`http://localhost:5000/posts/${id}`, {
       headers: {

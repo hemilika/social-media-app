@@ -1,3 +1,4 @@
+import { ArrowRightAlt } from "@mui/icons-material";
 import {
   Card,
   CardHeader,
@@ -69,7 +70,7 @@ const ProfileContent = ({ user, loading }) => {
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate("/connections")}
               >
-                {`${user.connections} connections`}
+                {`${user.connections.length} connections`}
               </Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">
@@ -133,6 +134,18 @@ const ProfileContent = ({ user, loading }) => {
           </Stack>
         </CardContent>
       </Card>
+      {user.jobField === "" ? (
+        <Stack
+          direction="row"
+          sx={{ cursor: "pointer" }}
+          onClick={() => navigate("/account")}
+        >
+          <Typography>Complete account information</Typography>
+          <ArrowRightAlt />
+        </Stack>
+      ) : (
+        ""
+      )}
     </Stack>
   );
 };

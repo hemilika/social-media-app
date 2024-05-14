@@ -12,6 +12,7 @@ import {
 import {
   ArrowDownward,
   Computer,
+  Done,
   Language,
   People,
   School,
@@ -47,11 +48,11 @@ const NewConnections = ({ loading, suggestions }) => {
                   title={<NameUsername user={connection} />}
                   subheader={
                     <Stack direction="row" spacing={3} alignItems="center">
-                      <Stack width="25%">
+                      <Stack width="27%">
                         <Typography variant="subtitle2" color="GrayText">
                           <Stack direction="row" alignItems={"center"}>
                             <People sx={{ mr: "5px" }} />
-                            {`${connection.connections} connections`}
+                            {`${connection.connections.length} connections`}
                           </Stack>
                         </Typography>
                         <Stack direction="row" alignItems="center">
@@ -81,13 +82,20 @@ const NewConnections = ({ loading, suggestions }) => {
                           </Stack>
                         </Typography>
                       </Stack>
-
-                      <Stack sx={{ ml: "30px" }}>
+                      <Stack>
                         {isConnected ? (
-                          <Typography>Already Connected</Typography>
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            spacing={1}
+                          >
+                            <Typography>Connected</Typography>
+                            <Done />
+                          </Stack>
                         ) : (
                           <Button
                             size="small"
+                            sx={{ mb: "10px" }}
                             onClick={() =>
                               handleAddConnection(connection, connection._id)
                             }

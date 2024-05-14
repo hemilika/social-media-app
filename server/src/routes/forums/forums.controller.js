@@ -8,10 +8,11 @@ const getAllForums = async (req, res) => {
 
 const createForum = async (req, res) => {
   try {
-    const { forumName, forumDescription } = req.body;
+    const { forumName, forumDescription, technologies } = req.body;
     const forum = new Forums({
       forumName: forumName,
       forumDescription: forumDescription,
+      technologies: technologies,
     });
     await forum.save();
     return res.status(200).json({ message: "Forum created successfully" });

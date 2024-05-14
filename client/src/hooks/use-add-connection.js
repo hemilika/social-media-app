@@ -1,11 +1,16 @@
 import axios from "axios";
 
 const useAddConnection = async (connectionData) => {
-  const { connections, fullName, username } = connectionData;
+  const { connections, fullName, username, profilePicture } = connectionData;
   try {
     const response = await axios.post(
       "http://localhost:5000/connections",
-      { connections, fullName, username },
+      {
+        connections: connections.length,
+        fullName: fullName,
+        username: username,
+        profilePicture: profilePicture,
+      },
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
