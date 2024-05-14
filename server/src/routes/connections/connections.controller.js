@@ -3,7 +3,7 @@ const User = require("../../models/users/users.mongo");
 
 const getAllConnections = async (req, res) => {
   const connections = await getUserConnections(req.userId);
-  res.status(200).json(connections);
+  res.status(200).json(connections[0].connections);
 };
 
 const addConnection = async (req, res) => {

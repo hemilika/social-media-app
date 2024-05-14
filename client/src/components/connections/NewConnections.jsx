@@ -38,6 +38,7 @@ const NewConnections = ({ loading, suggestions }) => {
       <Typography variant="subtitle1">New Connections Suggestions</Typography>
       <Grid container spacing={1}>
         {suggestions.map((connection, index) => {
+          console.log(connection);
           const connectionId = connection._id.toString();
           const isConnected = connectedMap[connectionId];
           return (
@@ -51,7 +52,7 @@ const NewConnections = ({ loading, suggestions }) => {
                         <Typography variant="subtitle2" color="GrayText">
                           <Stack direction="row" alignItems={"center"}>
                             <People sx={{ mr: "5px" }} />
-                            {`${connection.connections} connections`}
+                            {`${connection.connections.length} connections`}
                           </Stack>
                         </Typography>
                         <Stack direction="row" alignItems="center">

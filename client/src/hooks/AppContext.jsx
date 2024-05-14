@@ -39,9 +39,24 @@ export const AppProvider = ({ children }) => {
 
   const optimisticUpdate = ({ post, id, isDeleted }) => {
     if (isDeleted) {
+      // If a post is deleted, remove it from the posts array
       setPosts((prev) => prev.filter((post) => post._id !== id));
+    } else if (post) {
+      // If a new or updated post is received
+      setPosts((prev) => {
+        // Check if the post already exists in the array
+        const existingPostIndex = prev.findIndex((p) => p._id === post._id);
+        if (existingPostIndex !== -1) {
+          // If the post exists, update its likes count
+          const updatedPosts = [...prev];
+          updatedPosts[existingPostIndex] = { ...post };
+          return updatedPosts;
+        } else {
+          // If the post doesn't exist, add it to the beginning of the array
+          return [post, ...prev];
+        }
+      });
     }
-    if (post) setPosts((prev) => [post, ...prev]);
   };
 
   return (

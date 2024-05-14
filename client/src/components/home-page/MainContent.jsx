@@ -9,20 +9,47 @@ import {
   Button,
   IconButton,
   TextField,
-  InputAdornment,
 } from "@mui/material";
-import {
-  Comment,
-  Delete,
-  EmojiEmotions,
-  Favorite,
-  Textsms,
-} from "@mui/icons-material";
+import { Comment, Favorite, Textsms } from "@mui/icons-material";
 import LoadMore from "./LoadMore";
 import DatePosted from "./DatePosted";
 import Comments from "./Comments";
 import PostHeader from "./PostHeader";
+import useLikePost, { useCommentPost } from "../../hooks/use-like-post";
+import { useContext, useState } from "react";
+import { AppContext } from "../../hooks/AppContext";
+
 const MainContent = ({ posts, loading, user }) => {
+  const [comment, setComment] = useState("");
+  const [isLiked, setIsLiked] = useState({});
+
+  const { optimisticUpdate } = useContext(AppContext);
+
+  const likePost = async (post) => {
+    const { response } = await useLikePost(post);
+    if (response?.data) {
+      optimisticUpdate({ post: response?.data });
+      setIsLiked((prevIsLiked) => ({
+        ...prevIsLiked,
+        [post._id]: true,
+      }));
+    }
+  };
+
+  const commentPost = async (postId, user, comment) => {
+    const commentData = {
+      comment_message: comment,
+      profilePicture: user.profilePicture,
+      user: user.username,
+    };
+
+    const { response } = await useCommentPost(postId, commentData);
+    if (response?.data) {
+      optimisticUpdate({ post: response?.data });
+    }
+    setComment("");
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -82,9 +109,19 @@ const MainContent = ({ posts, loading, user }) => {
                     spacing={4}
                     sx={{ m: "5px" }}
                   >
-                    <Button startIcon={<Favorite />} color="inherit">
-                      Like
-                    </Button>
+                    {isLiked[post._id] ? (
+                      <Button startIcon={<Favorite />} color="error">
+                        Liked
+                      </Button>
+                    ) : (
+                      <Button
+                        startIcon={<Favorite />}
+                        color="inherit"
+                        onClick={() => likePost(post)}
+                      >
+                        Like
+                      </Button>
+                    )}
                     <Button startIcon={<Comment />} color="inherit">
                       Comment
                     </Button>
@@ -96,12 +133,16 @@ const MainContent = ({ posts, loading, user }) => {
                     <Avatar src={user?.profilePicture} />
                     <TextField
                       fullWidth
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
                       placeholder="Add a comment..."
                       InputProps={{
                         endAdornment: (
-                          <InputAdornment position="end">
-                            <EmojiEmotions color="inherit" />
-                          </InputAdornment>
+                          <Button
+                            onClick={() => commentPost(post._id, user, comment)}
+                          >
+                            <Comment color="inherit" />
+                          </Button>
                         ),
                       }}
                       sx={{

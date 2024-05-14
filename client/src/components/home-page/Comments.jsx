@@ -7,7 +7,7 @@ const Comments = ({ comments }) => {
       {comments.map((comment) => {
         return (
           <Stack direction="row" spacing={2} alignItems="center">
-            <Avatar />
+            <Avatar src={comment.profilePicture} />
             <Stack>
               <Typography color="gray">{comment.user}</Typography>
               <Typography>{comment.comment_message}</Typography>

@@ -1,20 +1,23 @@
-const { getConnections } = require("../connections/connections.model");
+const { getUserConnections } = require("../../models/users/users.model");
 const { getLoggedInUser } = require("../users/users.model");
 
 const getSuggestions = async (req) => {
   const { userId } = req;
-  const connections = await getConnections();
+
+  const connectionsData = await getUserConnections(userId);
+  const connectedUsername = connectionsData[0].connections.map(
+    (connection) => connection.username
+  );
+
   let users = await getLoggedInUser();
 
   users = users.filter((user) => user._id.toString() !== userId);
 
-  const connectedUsernames = connections.map(
-    (connection) => connection.username
+  const suggestions = users.filter(
+    (user) => !connectedUsername.includes(user.username)
   );
 
-  const suggestions = users.filter(
-    (user) => !connectedUsernames.includes(user.username)
-  );
+  console.log(suggestions);
 
   return suggestions;
 };
