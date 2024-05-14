@@ -22,7 +22,7 @@ import React from "react";
 
 const MainContentForums = () => {
   return (
-    <Card sx={{ marginTop: "2%" }}>
+    <Card>
       <CardHeader title="JavaScript Forum" subheader="Posted by: user1" />
       <Divider variant="middle" />
       <CardContent>

@@ -122,7 +122,16 @@ const AddPost = ({ user }) => {
           </Button>
         </Stack>
         {uploadedImage ? (
-          <img src={uploadedImage} alt="uploaded image" />
+          <Stack
+            padding={"20px"}
+            ml="10%"
+            justifyContent="center"
+            alignItems="center"
+            maxHeight={"400px"}
+            maxWidth={"800px"}
+          >
+            <img src={uploadedImage} alt="uploaded image" />
+          </Stack>
         ) : null}
       </Card>
       <CreateForumDialog open={openForumCreate} setOpen={setOpenForumCreate} />

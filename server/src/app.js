@@ -12,6 +12,7 @@ const {
 } = require("./routes/suggestions/suggestions.router");
 const { authenticateToken } = require("./routes/login/authorization");
 const { loginRouter } = require("./routes/login/login.router");
+const { forumPostsRouter } = require("./routes/forum-posts/forum-posts.router");
 
 const app = express();
 
@@ -27,5 +28,6 @@ app.use(postsRouter);
 app.use(connectionsRouter);
 app.use(forumsRouter);
 app.use(suggestionsRouter);
+app.use(forumPostsRouter);
 
 module.exports = app;

@@ -9,7 +9,7 @@ const forumsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  forumMembers: {
+  technologies: {
     type: [String],
     required: false,
   },
