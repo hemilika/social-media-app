@@ -15,9 +15,12 @@ import useAddPost from "../../hooks/use-add-post";
 import { useContext, useState } from "react";
 import CreateForumDialog from "./CreateForumDialog";
 import { AppContext } from "../../hooks/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = ({ user }) => {
   const [openForumCreate, setOpenForumCreate] = useState(false);
+
+  const navigate = useNavigate();
 
   const [uploadedImage, setUploadedImage] = useState(null);
   const { optimisticUpdate } = useContext(AppContext);
@@ -115,7 +118,7 @@ const AddPost = ({ user }) => {
               Create a forum
             </Typography>
           </Button>
-          <Button startIcon={<EventNote />}>
+          <Button startIcon={<EventNote />} onClick={() => navigate("/forums")}>
             <Typography variant="button" color="black" fontFamily="unset">
               Post on a forum
             </Typography>
