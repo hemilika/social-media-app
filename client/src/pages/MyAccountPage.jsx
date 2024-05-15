@@ -7,8 +7,11 @@ import useGetData from "../hooks/use-get-data";
 import OtherInformation from "../components/my-account/OtherInformation";
 
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const MyAccountPage = () => {
+  const [uploadedImage, setUploadedImage] = useState(null);
+
   const { data: user, loading } = useGetData("http://localhost:5000/users");
 
   const {
@@ -26,6 +29,8 @@ const MyAccountPage = () => {
         <Stack spacing={4} alignItems="left">
           <Card sx={{ padding: "50px", borderRadius: "20px" }}>
             <AccountInfo
+              uploadedImage={uploadedImage}
+              setUploadedImage={setUploadedImage}
               reset={reset}
               user={user[0]}
               register={register}
@@ -38,7 +43,11 @@ const MyAccountPage = () => {
               setValue={setValue}
             />
             <AccountPassword />
-            <AccountDelete isDirty={isDirty} handleSubmit={handleSubmit} />
+            <AccountDelete
+              isDirty={isDirty}
+              handleSubmit={handleSubmit}
+              uploadedImage={uploadedImage}
+            />
           </Card>
         </Stack>
       </Grid>

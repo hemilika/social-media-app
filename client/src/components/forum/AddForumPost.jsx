@@ -1,45 +1,21 @@
 import {
-  Avatar,
   Button,
   Card,
-  InputAdornment,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Select,
   Stack,
   TextField,
-  Typography,
-  styled,
 } from "@mui/material";
-import { PermMedia } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import AddImage from "../AddImage";
 
 const AddForumPost = ({ user }) => {
   const [uploadedImage, setUploadedImage] = useState(null);
 
   const { register, handleSubmit, reset } = useForm();
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
 
   //   const handleAddPost = async (formData) => {
   //     const currentDate = new Date(Date.now())
@@ -64,25 +40,29 @@ const AddForumPost = ({ user }) => {
       <Card sx={{ mt: "10px", padding: "10px" }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <TextField
+            multiline
+            sx={{ width: "90%" }}
             {...register("description", { required: true })}
             placeholder="Post on a forum..."
             autoComplete="off"
           />
-          <Select />
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Forum</InputLabel>
+            <Select
+              sx={{ width: "40%" }}
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Forum"
+            >
+              <MenuItem value={1}>Select forum </MenuItem>
+            </Select>
+          </FormControl>
           <Button>POST</Button>
         </Stack>
-        <Stack direction="row" justifyContent="space-evenly">
-          <Button startIcon={<PermMedia />} component="label">
-            <Typography variant="button" color="black" fontFamily="unset">
-              Media
-            </Typography>
-            <VisuallyHiddenInput
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </Button>
+        <Stack mt="10px" alignItems={"center"}>
+          <AddImage setUploadedImage={setUploadedImage} />
         </Stack>
+        <Stack direction="row" justifyContent="space-evenly"></Stack>
         {uploadedImage ? (
           <Stack
             padding={"20px"}

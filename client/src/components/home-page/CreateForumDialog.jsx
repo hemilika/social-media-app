@@ -13,7 +13,7 @@ import useCreateForum from "../../hooks/use-create-forum";
 
 const CreateForumDialog = ({ open, setOpen }) => {
   const navigate = useNavigate();
-  const { register, handleSubmit, control, watch } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   const { fields, append } = useFieldArray({
     control,
@@ -28,7 +28,6 @@ const CreateForumDialog = ({ open, setOpen }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log(watch());
   return (
     <Dialog open={open} onClose={handleClose}>
       <Stack spacing={2} padding="20px" width="400px">

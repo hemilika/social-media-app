@@ -19,7 +19,6 @@ const ForumsContent = () => {
           Explore Forums
         </Typography>
         {forums.map((forum, index) => {
-          console.log(forum?.technologies);
           return (
             <Card sx={{ borderRadius: "0", minWidth: "200px" }} key={index}>
               <CardHeader

@@ -16,6 +16,7 @@ import { useContext, useState } from "react";
 import CreateForumDialog from "./CreateForumDialog";
 import { AppContext } from "../../hooks/AppContext";
 import { useNavigate } from "react-router-dom";
+import AddImage from "../AddImage";
 
 const AddPost = ({ user }) => {
   const [openForumCreate, setOpenForumCreate] = useState(false);
@@ -26,28 +27,6 @@ const AddPost = ({ user }) => {
   const { optimisticUpdate } = useContext(AppContext);
 
   const { register, handleSubmit, reset } = useForm();
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
 
   const handleAddPost = async (formData) => {
     const currentDate = new Date(Date.now())
@@ -100,16 +79,7 @@ const AddPost = ({ user }) => {
           />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly">
-          <Button startIcon={<PermMedia />} component="label">
-            <Typography variant="button" color="black" fontFamily="unset">
-              Media
-            </Typography>
-            <VisuallyHiddenInput
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </Button>
+          <AddImage setUploadedImage={setUploadedImage} />
           <Button
             startIcon={<Forum />}
             onClick={() => setOpenForumCreate(true)}

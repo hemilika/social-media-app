@@ -11,7 +11,6 @@ const addConnection = async (req, res) => {
   const { userId } = req.body;
   const loggedUserData = await getLoggedInUser(userId);
   loggedUserData;
-  console.log(loggedUserData);
   const newConnection = req.body;
   try {
     const result = await User.findByIdAndUpdate(
