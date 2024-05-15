@@ -4,7 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 import useUpdateUser from "../../hooks/use-update-user";
 
-const AccountDelete = ({ uploadedImage, isDirty, handleSubmit }) => {
+const AccountDelete = ({
+  setUploadedImage,
+  uploadedImage,
+  isDirty,
+  handleSubmit,
+}) => {
   const navigate = useNavigate();
 
   const handleSaveChanges = async (formData) => {
@@ -16,6 +21,7 @@ const AccountDelete = ({ uploadedImage, isDirty, handleSubmit }) => {
     const { response, error } = await useUpdateUser(updatedData);
     if (response.status === 200) {
       navigate("/home");
+      setUploadedImage(null);
     }
   };
   return (

@@ -13,14 +13,14 @@ const ForumsContent = () => {
   if (loading) return <div>Loading Forums...</div>;
 
   return (
-    <Stack alignItems="center">
+    <Stack alignItems="center" minWidth="200px" maxWidth="250px">
       <Card>
         <Typography variant="subtitle1" sx={{ ml: "25%" }}>
           Explore Forums
         </Typography>
         {forums.map((forum, index) => {
           return (
-            <Card sx={{ borderRadius: "0", minWidth: "200px" }} key={index}>
+            <Card sx={{ borderRadius: "0" }} key={index}>
               <CardHeader
                 title={forum.forumName}
                 subheader={forum.forumDescription}

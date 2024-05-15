@@ -16,7 +16,7 @@ import DatePosted from "./DatePosted";
 import Comments from "./Comments";
 import PostHeader from "./PostHeader";
 import useLikePost, { useCommentPost } from "../../hooks/use-like-post";
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../hooks/AppContext";
 
 const MainContent = ({ posts, loading, user }) => {

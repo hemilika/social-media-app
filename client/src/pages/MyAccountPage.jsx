@@ -44,6 +44,7 @@ const MyAccountPage = () => {
             />
             <AccountPassword />
             <AccountDelete
+              setUploadedImage={setUploadedImage}
               isDirty={isDirty}
               handleSubmit={handleSubmit}
               uploadedImage={uploadedImage}

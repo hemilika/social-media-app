@@ -11,30 +11,41 @@ import {
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import AddImage from "../AddImage";
+import useGetForumNames from "../../hooks/use-get-forum-names";
+import useAddForumPost from "../../hooks/use-add-forum-post";
 
 const AddForumPost = ({ user }) => {
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [forumPosted, setForumPosted] = useState("");
+
+  const { forums, loading } = useGetForumNames(
+    "http://localhost:5000/forum/names"
+  );
 
   const { register, handleSubmit, reset } = useForm();
 
-  //   const handleAddPost = async (formData) => {
-  //     const currentDate = new Date(Date.now())
-  //       .toISOString()
-  //       .replace("Z", "+00:00");
-  //     const postData = {
-  //       description: formData.description,
-  //       posterUsername: user.username,
-  //       profilePicture: user.profilePicture,
-  //       media: uploadedImage,
-  //       datePosted: currentDate,
-  //     };
-  //     const { response } = await useAddPost(postData);
-  //     if (response?.data) {
-  //       optimisticUpdate({ post: response?.data });
-  //     }
-  //     reset({ description: "" });
-  //     setUploadedImage(null);
-  //   };
+  const handleSelectForumChange = (event) => {
+    setForumPosted(event.target.value);
+  };
+
+  const handleAddForumPost = async (formData) => {
+    const currentDate = new Date(Date.now())
+      .toISOString()
+      .replace("Z", "+00:00");
+    const postData = {
+      description: formData.description,
+      posterUsername: user.username,
+      media: uploadedImage,
+      datePosted: currentDate,
+      forumPosted: forumPosted,
+    };
+    await useAddForumPost(postData);
+    reset({ description: "" });
+    setUploadedImage(null);
+  };
+
+  if (loading) return <p>Loading Forums...</p>;
+  console.log(user);
   return (
     <>
       <Card sx={{ mt: "10px", padding: "10px" }}>
@@ -53,11 +64,18 @@ const AddForumPost = ({ user }) => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Forum"
+              onChange={(e) => handleSelectForumChange(e)}
             >
-              <MenuItem value={1}>Select forum </MenuItem>
+              {forums.map((forum) => {
+                return (
+                  <MenuItem key={forum._id} value={forum.forumName}>
+                    {forum.forumName}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
-          <Button>POST</Button>
+          <Button onClick={handleSubmit(handleAddForumPost)}>POST</Button>
         </Stack>
         <Stack mt="10px" alignItems={"center"}>
           <AddImage setUploadedImage={setUploadedImage} />

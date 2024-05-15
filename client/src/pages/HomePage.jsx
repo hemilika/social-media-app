@@ -4,7 +4,7 @@ import ForumsContent from "../components/home-page/ForumsContent";
 import MainContent from "../components/home-page/MainContent";
 import AddPost from "../components/home-page/AddPost";
 import useGetData from "../hooks/use-get-data";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../hooks/AppContext";
 
 const HomePage = () => {

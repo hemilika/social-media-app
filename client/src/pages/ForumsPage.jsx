@@ -10,8 +10,8 @@ const ForumsPage = () => {
   );
 
   return (
-    <Grid container paddingTop="10px">
-      <Grid item xs={9.5} paddingLeft="20px">
+    <Grid container spacing={3}>
+      <Grid item xs={9.5}>
         <MainContentForums />
       </Grid>
       <Grid item xs={2.5}>
