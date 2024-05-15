@@ -8,6 +8,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const [forumPosts, setForumPosts] = useState([]);
   const [posts, setPosts] = useState([]);
   const navbarItems = [
     {
@@ -37,31 +38,58 @@ export const AppProvider = ({ children }) => {
     },
   ];
 
-  const optimisticUpdate = ({ post, id, isDeleted }) => {
+  const optimisticUpdate = ({ post, id, isDeleted, postType }) => {
     if (isDeleted) {
       // If a post is deleted, remove it from the posts array
-      setPosts((prev) => prev.filter((post) => post._id !== id));
+      if (postType === "forum") {
+        setForumPosts((prev) => prev.filter((post) => post._id !== id));
+      } else {
+        setPosts((prev) => prev.filter((post) => post._id !== id));
+      }
     } else if (post) {
       // If a new or updated post is received
-      setPosts((prev) => {
-        // Check if the post already exists in the array
-        const existingPostIndex = prev.findIndex((p) => p._id === post._id);
-        if (existingPostIndex !== -1) {
-          // If the post exists, update its likes count
-          const updatedPosts = [...prev];
-          updatedPosts[existingPostIndex] = { ...post };
-          return updatedPosts;
-        } else {
-          // If the post doesn't exist, add it to the beginning of the array
-          return [post, ...prev];
-        }
-      });
+      if (postType === "forum") {
+        setForumPosts((prev) => {
+          // Check if the post already exists in the array
+          const existingPostIndex = prev.findIndex((p) => p._id === post._id);
+          if (existingPostIndex !== -1) {
+            // If the post exists, update its likes count
+            const updatedPosts = [...prev];
+            updatedPosts[existingPostIndex] = { ...post };
+            return updatedPosts;
+          } else {
+            // If the post doesn't exist, add it to the beginning of the array
+            return [post, ...prev];
+          }
+        });
+      } else {
+        setPosts((prev) => {
+          // Check if the post already exists in the array
+          const existingPostIndex = prev.findIndex((p) => p._id === post._id);
+          if (existingPostIndex !== -1) {
+            // If the post exists, update its likes count
+            const updatedPosts = [...prev];
+            updatedPosts[existingPostIndex] = { ...post };
+            return updatedPosts;
+          } else {
+            // If the post doesn't exist, add it to the beginning of the array
+            return [post, ...prev];
+          }
+        });
+      }
     }
   };
 
   return (
     <AppContext.Provider
-      value={{ navbarItems, optimisticUpdate, posts, setPosts }}
+      value={{
+        navbarItems,
+        optimisticUpdate,
+        posts,
+        setPosts,
+        forumPosts,
+        setForumPosts,
+      }}
     >
       {children}
     </AppContext.Provider>

@@ -1,4 +1,4 @@
-import { EventNote, Forum, PostAdd } from "@mui/icons-material";
+import { EventNote, FormatListNumbered, Forum } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -7,9 +7,7 @@ import {
   Stack,
   TextField,
   Typography,
-  styled,
 } from "@mui/material";
-import { PermMedia } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import useAddPost from "../../hooks/use-add-post";
 import { useContext, useState } from "react";
@@ -41,7 +39,7 @@ const AddPost = ({ user }) => {
     };
     const { response } = await useAddPost(postData);
     if (response?.data) {
-      optimisticUpdate({ post: response?.data });
+      optimisticUpdate({ post: response?.data, postType: "post" });
     }
     reset({ description: "" });
     setUploadedImage(null);

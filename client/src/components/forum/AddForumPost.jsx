@@ -9,14 +9,17 @@ import {
   TextField,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddImage from "../AddImage";
 import useGetForumNames from "../../hooks/use-get-forum-names";
 import useAddForumPost from "../../hooks/use-add-forum-post";
+import { AppContext } from "../../hooks/AppContext";
 
 const AddForumPost = ({ user }) => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [forumPosted, setForumPosted] = useState("");
+
+  const { optimisticUpdate } = useContext(AppContext);
 
   const { forums, loading } = useGetForumNames(
     "http://localhost:5000/forum/names"
@@ -39,30 +42,30 @@ const AddForumPost = ({ user }) => {
       datePosted: currentDate,
       forumPosted: forumPosted,
     };
-    await useAddForumPost(postData);
+    const { response } = await useAddForumPost(postData);
+    optimisticUpdate({ post: response?.data, postType: "forum" });
     reset({ description: "" });
     setUploadedImage(null);
+    setForumPosted("");
   };
 
   if (loading) return <p>Loading Forums...</p>;
-  console.log(user);
   return (
     <>
       <Card sx={{ mt: "10px", padding: "10px" }}>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack direction="row" spacing={1}>
           <TextField
             multiline
-            sx={{ width: "90%" }}
+            sx={{ width: "70%" }}
             {...register("description", { required: true })}
             placeholder="Post on a forum..."
             autoComplete="off"
           />
-          <FormControl fullWidth>
+
+          <FormControl sx={{ width: "30%" }}>
             <InputLabel id="demo-simple-select-label">Forum</InputLabel>
             <Select
-              sx={{ width: "40%" }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
+              value={forumPosted}
               label="Forum"
               onChange={(e) => handleSelectForumChange(e)}
             >
@@ -75,7 +78,12 @@ const AddForumPost = ({ user }) => {
               })}
             </Select>
           </FormControl>
-          <Button onClick={handleSubmit(handleAddForumPost)}>POST</Button>
+          <Button
+            onClick={handleSubmit(handleAddForumPost)}
+            variant="contained"
+          >
+            POST
+          </Button>
         </Stack>
         <Stack mt="10px" alignItems={"center"}>
           <AddImage setUploadedImage={setUploadedImage} />
@@ -90,7 +98,12 @@ const AddForumPost = ({ user }) => {
             maxHeight={"400px"}
             maxWidth={"800px"}
           >
-            <img src={uploadedImage} alt="uploaded image" />
+            <img
+              src={uploadedImage}
+              alt="uploaded image"
+              width="700px"
+              height="500px"
+            />
           </Stack>
         ) : null}
       </Card>

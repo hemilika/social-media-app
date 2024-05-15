@@ -1,7 +1,7 @@
 import { DateRange } from "@mui/icons-material";
-import { Stack, Typography } from "@mui/material";
+import { Divider, Stack, Typography } from "@mui/material";
 
-const DatePosted = ({ date }) => {
+const DatePosted = ({ date, poster }) => {
   const formattedDate = new Date(date).toLocaleString("en-US", {
     timeZone: "UTC",
     year: "numeric",
@@ -13,11 +13,14 @@ const DatePosted = ({ date }) => {
   });
 
   return (
-    <Stack direction="row" spacing={1} alignItems="center">
-      <DateRange fontSize="small" />
-      <Typography color="GrayText" variant="subtitle2">
-        {formattedDate}
-      </Typography>
+    <Stack spacing={1}>
+      {poster ? <Typography>{`Posted by: ${poster}`}</Typography> : null}
+      <Stack direction="row" spacing={1} alignItems="center">
+        <DateRange fontSize="small" />
+        <Typography color="GrayText" variant="subtitle2">
+          {formattedDate}
+        </Typography>
+      </Stack>
     </Stack>
   );
 };

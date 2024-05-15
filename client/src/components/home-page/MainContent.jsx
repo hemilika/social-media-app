@@ -28,7 +28,7 @@ const MainContent = ({ posts, loading, user }) => {
   const likePost = async (post) => {
     const { response } = await useLikePost(post);
     if (response?.data) {
-      optimisticUpdate({ post: response?.data });
+      optimisticUpdate({ post: response?.data, postType: "post" });
       setIsLiked((prevIsLiked) => ({
         ...prevIsLiked,
         [post._id]: true,
@@ -46,7 +46,7 @@ const MainContent = ({ posts, loading, user }) => {
     if (comment.length !== 0) {
       const { response } = await useCommentPost(postId, commentData);
       if (response?.data) {
-        optimisticUpdate({ post: response?.data });
+        optimisticUpdate({ post: response?.data, postType: "post" });
       }
     }
     setComment("");
@@ -143,7 +143,7 @@ const MainContent = ({ posts, loading, user }) => {
                           <Button
                             onClick={() => commentPost(post._id, user, comment)}
                           >
-                            ADD
+                            SEND
                           </Button>
                         ),
                       }}

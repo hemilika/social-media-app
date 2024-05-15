@@ -12,7 +12,7 @@ const PostHeader = ({ post, user }) => {
   const handleDeletePost = () => {
     useDeletePost(post._id);
     setOpenDeleteDialog(false);
-    optimisticUpdate({ id: post._id, isDeleted: true });
+    optimisticUpdate({ id: post._id, isDeleted: true, postType: "post" });
   };
   return (
     <Stack direction="row" justifyContent="space-between">

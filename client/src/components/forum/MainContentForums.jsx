@@ -1,10 +1,4 @@
-import {
-  Comment,
-  EmojiEmotions,
-  Favorite,
-  Sync,
-  Textsms,
-} from "@mui/icons-material";
+import { Comment, Favorite, Textsms } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -13,19 +7,15 @@ import {
   CardHeader,
   Divider,
   IconButton,
-  InputAdornment,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
 import AddForumPost from "./AddForumPost";
 import useGetData from "../../hooks/use-get-data";
+import DatePosted from "../home-page/DatePosted";
 
-const MainContentForums = () => {
-  const { data: forumPosts, loading } = useGetData(
-    "http://localhost:5000/forum-posts"
-  );
+const MainContentForums = ({ forumPosts, loading }) => {
   const { data: user } = useGetData("http://localhost:5000/users");
   if (loading) return <p>Loading posts...</p>;
   console.log(forumPosts);
@@ -37,7 +27,12 @@ const MainContentForums = () => {
           <Card>
             <CardHeader
               title={`${post.forumPosted}`}
-              subheader={`Posted by: ${post.posterUsername}`}
+              subheader={
+                <DatePosted
+                  date={post.datePosted}
+                  poster={post.posterUsername}
+                />
+              }
             />
             <Divider variant="middle" />
             <CardContent>
@@ -53,6 +48,27 @@ const MainContentForums = () => {
                 ></Card>
                 <Divider />
                 <Stack>
+                  <Divider />
+                  <Card
+                    sx={{
+                      mt: "10px",
+                      borderRadius: "none",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {post?.media && (
+                      <CardContent
+                        sx={{ maxWidth: "700px", maxHeight: "500px" }}
+                      >
+                        <img
+                          src={post?.media}
+                          alt="Couldn't load image"
+                          width="700px"
+                        />
+                      </CardContent>
+                    )}
+                  </Card>
                   <Stack
                     justifyContent="flex-start"
                     direction="row"
@@ -82,11 +98,15 @@ const MainContentForums = () => {
                     </Button>
                   </Stack>
                   <Stack direction="row" alignItems="center" spacing={2}>
+                    <Avatar
+                      src={user[0]?.profilePicture}
+                      sx={{ width: "50px", height: "50px" }}
+                    />
                     <TextField
                       fullWidth
                       placeholder="Add a comment..."
                       InputProps={{
-                        endAdornment: <Button>ADD</Button>,
+                        endAdornment: <Button>SEND</Button>,
                       }}
                       sx={{
                         "& .MuiInputBase-root": {
