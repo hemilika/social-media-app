@@ -26,7 +26,10 @@ const MainContent = ({ posts, loading, user }) => {
   const { optimisticUpdate } = useContext(AppContext);
 
   const likePost = async (post) => {
-    const { response } = await useLikePost(post);
+    const { response } = await useLikePost(
+      `http://localhost:5000/posts/${post._id}/like`,
+      post
+    );
     if (response?.data) {
       optimisticUpdate({ post: response?.data, postType: "post" });
       setIsLiked((prevIsLiked) => ({

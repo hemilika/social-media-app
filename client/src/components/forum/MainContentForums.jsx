@@ -14,11 +14,28 @@ import {
 import AddForumPost from "./AddForumPost";
 import useGetData from "../../hooks/use-get-data";
 import DatePosted from "../home-page/DatePosted";
+import useLikePost from "../../hooks/use-like-post";
+import { useContext, useState } from "react";
+import { AppContext } from "../../hooks/AppContext";
 
 const MainContentForums = ({ forumPosts, loading }) => {
+  const [isLikedPost, setIsLikedPost] = useState({});
   const { data: user } = useGetData("http://localhost:5000/users");
+
+  const { optimisticUpdate } = useContext(AppContext);
+
+  const likeForumPost = async (post) => {
+    const { response } = await useLikePost(
+      `http://localhost:5000/forum-posts/${post._id}/like`,
+      post
+    );
+    optimisticUpdate({ post: response?.data, postType: "forum" });
+    setIsLikedPost((prevIsLiked) => ({
+      ...prevIsLiked,
+      [post._id]: true,
+    }));
+  };
   if (loading) return <p>Loading posts...</p>;
-  console.log(forumPosts);
   return (
     <Stack spacing={2}>
       <AddForumPost user={user[0]} />
@@ -90,9 +107,19 @@ const MainContentForums = ({ forumPosts, loading }) => {
                     spacing={4}
                     sx={{ m: "5px" }}
                   >
-                    <Button startIcon={<Favorite />} color="inherit">
-                      Like
-                    </Button>
+                    {isLikedPost[post._id] ? (
+                      <Button startIcon={<Favorite />} color="error">
+                        Liked
+                      </Button>
+                    ) : (
+                      <Button
+                        startIcon={<Favorite />}
+                        color="inherit"
+                        onClick={() => likeForumPost(post)}
+                      >
+                        Like
+                      </Button>
+                    )}
                     <Button startIcon={<Comment />} color="inherit">
                       Comment
                     </Button>

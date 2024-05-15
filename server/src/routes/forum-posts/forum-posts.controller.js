@@ -1,5 +1,6 @@
 const { getForumPosts } = require("../../models/forum-posts/forum-posts.model");
 const ForumPost = require("../../models/forum-posts/forum-posts.mongo");
+
 const getAllForumPosts = async (req, res) => {
   try {
     const forumPosts = await getForumPosts();
@@ -39,4 +40,22 @@ const addForumPost = async (req, res) => {
   }
 };
 
-module.exports = { getAllForumPosts, addForumPost };
+const likeForumPost = async (req, res) => {
+  try {
+    const { post } = req.body;
+    const { _id } = post;
+    const result = await ForumPost.findByIdAndUpdate(
+      _id,
+      { $inc: { likes: 1 } },
+      {
+        new: true,
+      }
+    );
+    return res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Couldn't like post" });
+  }
+};
+
+module.exports = { getAllForumPosts, addForumPost, likeForumPost };
