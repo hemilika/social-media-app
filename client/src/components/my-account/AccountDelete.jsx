@@ -17,7 +17,6 @@ const AccountDelete = ({
       ...formData,
       profilePicture: uploadedImage || formData.profilePicture,
     };
-    console.log(updatedData);
     const { response, error } = await useUpdateUser(updatedData);
     if (response.status === 200) {
       navigate("/home");

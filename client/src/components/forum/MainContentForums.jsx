@@ -14,12 +14,14 @@ import {
 import AddForumPost from "./AddForumPost";
 import useGetData from "../../hooks/use-get-data";
 import DatePosted from "../home-page/DatePosted";
-import useLikePost from "../../hooks/use-like-post";
+import useLikePost, { useCommentPost } from "../../hooks/use-like-post";
 import { useContext, useState } from "react";
 import { AppContext } from "../../hooks/AppContext";
 import ForumPostHeader from "./ForumPostHeader";
+import Comments from "../home-page/Comments";
 
 const MainContentForums = ({ forumPosts, loading }) => {
+  const [comment, setComment] = useState("");
   const [isLikedPost, setIsLikedPost] = useState({});
   const { data: user } = useGetData("http://localhost:5000/users");
 
@@ -36,6 +38,26 @@ const MainContentForums = ({ forumPosts, loading }) => {
       [post._id]: true,
     }));
   };
+
+  const commentForumPost = async (postId, user, comment) => {
+    const commentData = {
+      comment_message: comment,
+      profilePicture: user.profilePicture,
+      user: user.username,
+    };
+
+    if (comment.length !== 0) {
+      const { response } = await useCommentPost(
+        `http://localhost:5000/forum-posts/${postId}/comment`,
+        commentData
+      );
+      if (response?.data) {
+        optimisticUpdate({ post: response?.data, postType: "forum" });
+      }
+    }
+    setComment("");
+  };
+
   if (loading) return <p>Loading posts...</p>;
   return (
     <Stack spacing={2}>
@@ -125,6 +147,9 @@ const MainContentForums = ({ forumPosts, loading }) => {
                       Comment
                     </Button>
                   </Stack>
+                  <Stack sx={{ mb: "3px" }}>
+                    <Comments comments={post.comments} />
+                  </Stack>
                   <Stack direction="row" alignItems="center" spacing={2}>
                     <Avatar
                       src={user[0]?.profilePicture}
@@ -132,9 +157,19 @@ const MainContentForums = ({ forumPosts, loading }) => {
                     />
                     <TextField
                       fullWidth
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
                       placeholder="Add a comment..."
                       InputProps={{
-                        endAdornment: <Button>SEND</Button>,
+                        endAdornment: (
+                          <Button
+                            onClick={() =>
+                              commentForumPost(post._id, user[0], comment)
+                            }
+                          >
+                            SEND
+                          </Button>
+                        ),
                       }}
                       sx={{
                         "& .MuiInputBase-root": {

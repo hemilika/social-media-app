@@ -47,7 +47,10 @@ const MainContent = ({ posts, loading, user }) => {
     };
 
     if (comment.length !== 0) {
-      const { response } = await useCommentPost(postId, commentData);
+      const { response } = await useCommentPost(
+        `http://localhost:5000/posts/${postId}/comment`,
+        commentData
+      );
       if (response?.data) {
         optimisticUpdate({ post: response?.data, postType: "post" });
       }

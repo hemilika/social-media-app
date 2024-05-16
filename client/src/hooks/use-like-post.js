@@ -20,10 +20,10 @@ const useLikePost = async (endpoint, post) => {
   }
 };
 
-export const useCommentPost = async (postId, comment) => {
+export const useCommentPost = async (endpoint, comment) => {
   try {
     const response = await axios.post(
-      `http://localhost:5000/posts/${postId}/comment`,
+      endpoint,
       {
         comment,
       },

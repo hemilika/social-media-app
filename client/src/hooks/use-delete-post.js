@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const useDeletePost = async (endpoint) => {
-  console.log(endpoint);
   try {
     const response = await axios.delete(endpoint, {
       headers: {

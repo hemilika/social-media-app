@@ -68,9 +68,28 @@ const deleteForumPost = async (req, res) => {
   }
 };
 
+const commentForumPost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { comment } = req.body;
+    const result = await ForumPost.findByIdAndUpdate(
+      id,
+      { $push: { comments: comment } },
+      {
+        new: true,
+      }
+    );
+    return res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Couldn't comment on forum post" });
+  }
+};
+
 module.exports = {
   getAllForumPosts,
   addForumPost,
   likeForumPost,
   deleteForumPost,
+  commentForumPost,
 };
