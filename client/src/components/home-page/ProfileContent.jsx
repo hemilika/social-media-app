@@ -76,15 +76,10 @@ const ProfileContent = ({ user, loading }) => {
             </Stack>
             <Stack justifyContent="space-between" direction="row">
               <Typography variant="body2" color="text.secondary">
-                Forums
+                Date Joined
               </Typography>
-              <Typography
-                variant="body2"
-                color="primary"
-                onClick={() => navigate("/forums")}
-                sx={{ cursor: "pointer" }}
-              >
-                2
+              <Typography variant="body2" color="primary">
+                {new Date(user.dateJoined).toLocaleDateString("en-GB")}
               </Typography>
             </Stack>
           </Stack>
@@ -127,7 +122,9 @@ const ProfileContent = ({ user, loading }) => {
               <Stack alignItems="flex-end">
                 {user.interests.map((interest) => {
                   return (
-                    <Typography variant="body2">{interest.label}</Typography>
+                    <Typography variant="body2" key={interest.label}>
+                      {interest.label}
+                    </Typography>
                   );
                 })}
               </Stack>

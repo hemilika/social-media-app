@@ -66,6 +66,7 @@ const AddPost = ({ user }) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment
+                  postition="end"
                   variant="filled"
                   sx={{ cursor: "pointer" }}
                   onClick={handleSubmit(handleAddPost)}

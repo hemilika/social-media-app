@@ -15,7 +15,7 @@ import AddForumPost from "./AddForumPost";
 import useGetData from "../../hooks/use-get-data";
 import DatePosted from "../home-page/DatePosted";
 import useLikePost, { useCommentPost } from "../../hooks/use-like-post";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AppContext } from "../../hooks/AppContext";
 import ForumPostHeader from "./ForumPostHeader";
 import Comments from "../home-page/Comments";
@@ -23,6 +23,7 @@ import Comments from "../home-page/Comments";
 const MainContentForums = ({ forumPosts, loading }) => {
   const [comment, setComment] = useState("");
   const [isLikedPost, setIsLikedPost] = useState({});
+
   const { data: user } = useGetData("http://localhost:5000/users");
 
   const { optimisticUpdate } = useContext(AppContext);
@@ -70,7 +71,7 @@ const MainContentForums = ({ forumPosts, loading }) => {
       )}
       {forumPosts.map((post) => {
         return (
-          <Card>
+          <Card key={post._id}>
             <CardHeader
               title={<ForumPostHeader forumPost={post} user={user[0]} />}
               subheader={
