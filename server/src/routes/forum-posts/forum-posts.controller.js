@@ -54,8 +54,23 @@ const likeForumPost = async (req, res) => {
     return res.status(201).json(result);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Couldn't like post" });
+    res.status(500).json({ message: "Couldn't like forum post" });
+  }
+};
+const deleteForumPost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await ForumPost.findByIdAndDelete(id);
+    return res.status(201).json(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Couldn't delete forum post" });
   }
 };
 
-module.exports = { getAllForumPosts, addForumPost, likeForumPost };
+module.exports = {
+  getAllForumPosts,
+  addForumPost,
+  likeForumPost,
+  deleteForumPost,
+};

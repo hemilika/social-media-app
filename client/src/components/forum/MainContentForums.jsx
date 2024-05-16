@@ -17,6 +17,7 @@ import DatePosted from "../home-page/DatePosted";
 import useLikePost from "../../hooks/use-like-post";
 import { useContext, useState } from "react";
 import { AppContext } from "../../hooks/AppContext";
+import ForumPostHeader from "./ForumPostHeader";
 
 const MainContentForums = ({ forumPosts, loading }) => {
   const [isLikedPost, setIsLikedPost] = useState({});
@@ -43,7 +44,7 @@ const MainContentForums = ({ forumPosts, loading }) => {
         return (
           <Card>
             <CardHeader
-              title={`${post.forumPosted}`}
+              title={<ForumPostHeader forumPost={post} user={user[0]} />}
               subheader={
                 <DatePosted
                   date={post.datePosted}
