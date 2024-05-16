@@ -1,4 +1,4 @@
-import { AccessTime, LockClock } from "@mui/icons-material";
+import { AccessTime } from "@mui/icons-material";
 import { Avatar, MenuItem, Stack, Typography } from "@mui/material";
 
 const NotificationsList = ({ message, time }) => {

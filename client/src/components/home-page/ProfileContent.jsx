@@ -9,11 +9,12 @@ import {
   Stack,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import LoadingProfile from "../loading-animations/LoadingProfile";
 
 const ProfileContent = ({ user, loading }) => {
   const navigate = useNavigate();
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingProfile />;
 
   return (
     <Stack spacing={5}>

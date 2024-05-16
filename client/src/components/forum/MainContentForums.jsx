@@ -62,6 +62,12 @@ const MainContentForums = ({ forumPosts, loading }) => {
   return (
     <Stack spacing={2}>
       <AddForumPost user={user[0]} />
+      {forumPosts.length === 0 && (
+        <div>
+          <p>There are no posts in this forum</p>
+          <p>Be the first to post one</p>
+        </div>
+      )}
       {forumPosts.map((post) => {
         return (
           <Card>

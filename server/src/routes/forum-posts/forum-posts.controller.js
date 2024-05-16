@@ -3,7 +3,8 @@ const ForumPost = require("../../models/forum-posts/forum-posts.mongo");
 
 const getAllForumPosts = async (req, res) => {
   try {
-    const forumPosts = await getForumPosts();
+    const forumName = req.query.search;
+    const forumPosts = await getForumPosts(forumName);
     return res.status(200).json(forumPosts);
   } catch (error) {
     return res.status(500).json({ error: error.message });

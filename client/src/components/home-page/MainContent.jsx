@@ -59,7 +59,17 @@ const MainContent = ({ posts, loading, user }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Loading Posts...
+      </div>
+    );
   }
   return (
     <Stack>

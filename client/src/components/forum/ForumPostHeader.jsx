@@ -21,7 +21,7 @@ const ForumPostHeader = ({ forumPost, user }) => {
       <Typography variant="subtitle2" fontWeight="bold" sx={{ mt: "2px" }}>
         {forumPost.forumPosted}
       </Typography>
-      {forumPost?.posterUsername === user.username ? (
+      {forumPost?.posterUsername === user?.username ? (
         <Button
           onClick={() => setOpenDeleteDialog(true)}
           size="small"

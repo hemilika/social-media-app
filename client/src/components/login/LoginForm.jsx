@@ -70,7 +70,7 @@ const LoginForm = () => {
             fullWidth
             label="Username"
             autoFocus
-            error={errors?.username || loginError}
+            error={!!errors?.username || !!loginError}
             helperText={errors?.username?.message || loginError}
           />
           <TextField
@@ -83,7 +83,7 @@ const LoginForm = () => {
             name="password"
             label="Password"
             type="password"
-            error={errors?.password || loginError}
+            error={!!errors?.password || !!loginError}
             helperText={errors?.password?.message}
           />
           <FormControlLabel

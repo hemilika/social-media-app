@@ -1,13 +1,16 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const useGetData = (endpoint) => {
+const useGetData = (endpoint, search) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const headerToken = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    params: {
+      search: search,
     },
   };
   const fetchData = async () => {
