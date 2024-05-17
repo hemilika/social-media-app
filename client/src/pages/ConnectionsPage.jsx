@@ -14,10 +14,10 @@ const ConnectionsPage = () => {
   if (loading) return <div>Loading Connections...</div>;
   return (
     <Grid container spacing={1}>
-      <Grid item xs={2.5}>
+      <Grid item xs={12} md={2.5}>
         <YourConnections connections={connections} />
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={9} md={9}>
         <NewConnections
           loading={loadingSuggestions}
           suggestions={suggestions}

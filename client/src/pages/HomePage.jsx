@@ -24,7 +24,9 @@ const HomePage = () => {
     <Grid container>
       <Grid
         item
-        xs={2.5}
+        xs={12}
+        sm={4}
+        md={2.5}
         style={{
           position: "sticky",
           top: 80,
@@ -34,13 +36,15 @@ const HomePage = () => {
       >
         <ProfileContent user={user[0]} loading={loadingUser} />
       </Grid>
-      <Grid item xs={7.2} style={{ paddingLeft: "2%" }}>
+      <Grid item xs={12} sm={8} md={7} style={{ paddingLeft: "2%" }}>
         <AddPost user={user[0]} />
         <MainContent posts={posts} loading={loading} user={user[0]} />
       </Grid>
       <Grid
         item
-        xs={2.5}
+        xs={3}
+        sm={3}
+        md={2.5}
         style={{ position: "absolute", top: 80, right: 20, height: "100vh" }}
       >
         <ForumsContent />

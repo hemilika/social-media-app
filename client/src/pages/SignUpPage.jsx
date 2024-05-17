@@ -1,12 +1,16 @@
-import { Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import SignUpForm from "../components/login/SignUpForm";
 import devconnectbackground from "/devconnectbackground.jpg";
 const SignUpPage = () => {
   return (
-    <Stack direction="row" alignItems="center">
-      <img src={devconnectbackground} height="730" width="800px" />
-      <SignUpForm />
-    </Stack>
+    <Grid container>
+      <Grid item xs={6} md={6}>
+        <img src={devconnectbackground} width="110%" />
+      </Grid>
+      <Grid item xs={6} md={6} alignContent="center" mb="80px">
+        <SignUpForm />
+      </Grid>
+    </Grid>
   );
 };
 
