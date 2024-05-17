@@ -108,11 +108,20 @@ const MainContentForums = ({ forumPosts, loading }) => {
                       <CardContent
                         sx={{ maxWidth: "700px", maxHeight: "500px" }}
                       >
-                        <img
-                          src={post?.media}
-                          alt="Couldn't load image"
-                          width="700px"
-                        />
+                        {post.media.split("/")[0].split(":")[1] === "image" ? (
+                          <img
+                            src={post.media}
+                            alt="uploaded image"
+                            style={{ maxHeight: "400px", maxWidth: "700px" }}
+                          />
+                        ) : (
+                          <video
+                            controls
+                            src={post.media}
+                            alt="uploaded video"
+                            style={{ maxHeight: "400px", maxWidth: "700px" }}
+                          />
+                        )}
                       </CardContent>
                     )}
                   </Card>

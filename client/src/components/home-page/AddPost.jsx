@@ -45,6 +45,8 @@ const AddPost = ({ user }) => {
     setUploadedImage(null);
   };
 
+  const isImage = uploadedImage?.startsWith("data:image");
+
   return (
     <>
       <Card sx={{ mt: "10px", padding: "10px" }}>
@@ -103,7 +105,7 @@ const AddPost = ({ user }) => {
             maxHeight={"400px"}
             maxWidth={"800px"}
           >
-            {uploadedImage.split("/")[0].split(":")[1] === "image" ? (
+            {isImage ? (
               <img
                 src={uploadedImage}
                 alt="uploaded image"
@@ -111,6 +113,7 @@ const AddPost = ({ user }) => {
               />
             ) : (
               <video
+                controls
                 src={uploadedImage}
                 alt="uploaded video"
                 style={{ maxHeight: "400px", maxWidth: "700px" }}

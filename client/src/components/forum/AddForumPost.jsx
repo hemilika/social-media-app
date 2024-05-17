@@ -49,6 +49,8 @@ const AddForumPost = ({ user }) => {
     setForumPosted("");
   };
 
+  const isImage = uploadedImage?.startsWith("data:image");
+
   if (loading) return <p>Loading Forums...</p>;
   return (
     <>
@@ -98,12 +100,20 @@ const AddForumPost = ({ user }) => {
             maxHeight={"400px"}
             maxWidth={"800px"}
           >
-            <img
-              src={uploadedImage}
-              alt="uploaded image"
-              width="700px"
-              height="500px"
-            />
+            {isImage ? (
+              <img
+                src={uploadedImage}
+                alt="uploaded image"
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            ) : (
+              <video
+                src={uploadedImage}
+                alt="uploaded video"
+                controls
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            )}
           </Stack>
         ) : null}
       </Card>
