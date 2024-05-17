@@ -71,7 +71,9 @@ const ProfileContent = ({ user, loading }) => {
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate("/connections")}
               >
-                {`${user.connections.length} connections`}
+                {`${user.connections.length} ${
+                  user.connections.length === 1 ? "connection" : "connections"
+                }`}
               </Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">
@@ -98,7 +100,9 @@ const ProfileContent = ({ user, loading }) => {
               <Typography variant="body2" color="text.secondary">
                 Experience
               </Typography>
-              <Typography variant="body2">{`${user.experience} years`}</Typography>
+              <Typography variant="body2">{`${user.experience} ${
+                user.experience === 1 ? "year" : "years"
+              }`}</Typography>
             </Stack>
           </Stack>
           <Divider sx={{ mt: "8px", mb: "8px" }} />

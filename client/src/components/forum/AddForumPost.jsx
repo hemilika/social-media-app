@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
-import AddImage from "../AddImage";
+import AddMedia from "../AddMedia";
 import useGetForumNames from "../../hooks/use-get-forum-names";
 import useAddForumPost from "../../hooks/use-add-forum-post";
 import { AppContext } from "../../hooks/AppContext";
@@ -86,7 +86,7 @@ const AddForumPost = ({ user }) => {
           </Button>
         </Stack>
         <Stack mt="10px" alignItems={"center"}>
-          <AddImage setUploadedImage={setUploadedImage} />
+          <AddMedia setUploadedImage={setUploadedImage} />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly"></Stack>
         {uploadedImage ? (

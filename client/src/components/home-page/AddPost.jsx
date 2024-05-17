@@ -14,7 +14,7 @@ import { useContext, useState } from "react";
 import CreateForumDialog from "./CreateForumDialog";
 import { AppContext } from "../../hooks/AppContext";
 import { useNavigate } from "react-router-dom";
-import AddImage from "../AddImage";
+import AddMedia from "../AddMedia";
 
 const AddPost = ({ user }) => {
   const [openForumCreate, setOpenForumCreate] = useState(false);
@@ -44,6 +44,7 @@ const AddPost = ({ user }) => {
     reset({ description: "" });
     setUploadedImage(null);
   };
+
   return (
     <>
       <Card sx={{ mt: "10px", padding: "10px" }}>
@@ -78,7 +79,7 @@ const AddPost = ({ user }) => {
           />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly">
-          <AddImage setUploadedImage={setUploadedImage} />
+          <AddMedia setUploadedImage={setUploadedImage} />
           <Button
             startIcon={<Forum />}
             onClick={() => setOpenForumCreate(true)}
@@ -102,7 +103,19 @@ const AddPost = ({ user }) => {
             maxHeight={"400px"}
             maxWidth={"800px"}
           >
-            <img src={uploadedImage} alt="uploaded image" />
+            {uploadedImage.split("/")[0].split(":")[1] === "image" ? (
+              <img
+                src={uploadedImage}
+                alt="uploaded image"
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            ) : (
+              <video
+                src={uploadedImage}
+                alt="uploaded video"
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            )}
           </Stack>
         ) : null}
       </Card>

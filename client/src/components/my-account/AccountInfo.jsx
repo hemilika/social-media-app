@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import AddImage from "../AddImage";
+import AddMedia from "../AddMedia";
 
 const AccountInfo = ({
   uploadedImage,
@@ -36,7 +36,7 @@ const AccountInfo = ({
           </Stack>
         </Stack>
         <Stack direction="row" spacing={1} alignItems="center">
-          <AddImage setUploadedImage={setUploadedImage} />
+          <AddMedia setUploadedImage={setUploadedImage} />
           <p>or </p>
           <TextField
             label="Paste photo URL"

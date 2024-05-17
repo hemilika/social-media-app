@@ -1,7 +1,7 @@
 import { PermMedia } from "@mui/icons-material";
 import { Button, Typography, styled } from "@mui/material";
 import { useLocation } from "react-router-dom";
-const AddImage = ({ setUploadedImage }) => {
+const AddMedia = ({ setUploadedImage }) => {
   const location = useLocation();
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -41,11 +41,11 @@ const AddImage = ({ setUploadedImage }) => {
       </Typography>
       <VisuallyHiddenInput
         type="file"
-        accept="image/*"
+        accept="image/*,video/*"
         onChange={handleImageChange}
       />
     </Button>
   );
 };
 
-export default AddImage;
+export default AddMedia;

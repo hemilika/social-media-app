@@ -10,6 +10,7 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [forumPosts, setForumPosts] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const navbarItems = [
     {
       navigationPath: "/home",
@@ -89,6 +90,8 @@ export const AppProvider = ({ children }) => {
         setPosts,
         forumPosts,
         setForumPosts,
+        setSearchValue,
+        searchValue,
       }}
     >
       {children}

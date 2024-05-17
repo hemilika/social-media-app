@@ -4,7 +4,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -15,9 +14,11 @@ import devConnectLogo from "/devconnectlogo.png";
 import { useForm } from "react-hook-form";
 import useLogin from "../../hooks/use-login";
 import { useState } from "react";
-import { Stack } from "@mui/material";
+import { InputAdornment, Stack } from "@mui/material";
+import { Visibility } from "@mui/icons-material";
 
 const LoginForm = () => {
+  const [passwordVisibilty, setPasswordVisibilty] = useState(false);
   const [loginError, setLoginError] = useState();
   const navigate = useNavigate();
 
@@ -82,9 +83,21 @@ const LoginForm = () => {
             fullWidth
             name="password"
             label="Password"
-            type="password"
+            type={passwordVisibilty ? "text" : "password"}
             error={!!errors?.password || !!loginError}
             helperText={errors?.password?.message}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment
+                  postition="end"
+                  variant="filled"
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => setPasswordVisibilty(!passwordVisibilty)}
+                >
+                  <Visibility />
+                </InputAdornment>
+              ),
+            }}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
