@@ -9,11 +9,12 @@ import {
   Stack,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import LoadingProfile from "../loading-animations/LoadingProfile";
 
 const ProfileContent = ({ user, loading }) => {
   const navigate = useNavigate();
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingProfile />;
 
   return (
     <Stack spacing={5}>
@@ -70,20 +71,17 @@ const ProfileContent = ({ user, loading }) => {
                 sx={{ cursor: "pointer" }}
                 onClick={() => navigate("/connections")}
               >
-                {`${user.connections.length} connections`}
+                {`${user.connections.length} ${
+                  user.connections.length === 1 ? "connection" : "connections"
+                }`}
               </Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row">
               <Typography variant="body2" color="text.secondary">
-                Forums
+                Date Joined
               </Typography>
-              <Typography
-                variant="body2"
-                color="primary"
-                onClick={() => navigate("/forums")}
-                sx={{ cursor: "pointer" }}
-              >
-                2
+              <Typography variant="body2" color="primary">
+                {new Date(user.dateJoined).toLocaleDateString("en-GB")}
               </Typography>
             </Stack>
           </Stack>
@@ -102,7 +100,9 @@ const ProfileContent = ({ user, loading }) => {
               <Typography variant="body2" color="text.secondary">
                 Experience
               </Typography>
-              <Typography variant="body2">{`${user.experience} years`}</Typography>
+              <Typography variant="body2">{`${user.experience} ${
+                user.experience === 1 ? "year" : "years"
+              }`}</Typography>
             </Stack>
           </Stack>
           <Divider sx={{ mt: "8px", mb: "8px" }} />
@@ -126,7 +126,9 @@ const ProfileContent = ({ user, loading }) => {
               <Stack alignItems="flex-end">
                 {user.interests.map((interest) => {
                   return (
-                    <Typography variant="body2">{interest.label}</Typography>
+                    <Typography variant="body2" key={interest.label}>
+                      {interest.label}
+                    </Typography>
                   );
                 })}
               </Stack>

@@ -14,6 +14,8 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 
 import "./pageStyle.css";
+import ProtectedRoute from "./ProtectedRoute";
+import SpecificForumPage from "./pages/SpecificForumPage";
 
 const App = () => {
   return (
@@ -23,10 +25,26 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/" element={<Navbar />}>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/connections" element={<ConnectionsPage />} />
-          <Route path="/forums" element={<ForumsPage />} />
-          <Route path="/account" element={<MyAccountPage />} />
+          <Route
+            path="/home"
+            element={<ProtectedRoute element={<HomePage />} />}
+          />
+          <Route
+            path="/connections"
+            element={<ProtectedRoute element={<ConnectionsPage />} />}
+          />
+          <Route
+            path="/forums"
+            element={<ProtectedRoute element={<ForumsPage />} />}
+          />
+          <Route
+            path="/forums/:name"
+            element={<ProtectedRoute element={<SpecificForumPage />} />}
+          />
+          <Route
+            path="/account"
+            element={<ProtectedRoute element={<MyAccountPage />} />}
+          />
         </Route>
       </Routes>
     </Router>

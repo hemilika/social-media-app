@@ -17,7 +17,8 @@ const { forumPostsRouter } = require("./routes/forum-posts/forum-posts.router");
 const app = express();
 
 app.use(cors("http://localhost:5173"));
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
+app.use(express.urlencoded({ limit: "5mb", extended: true }));
 
 app.use(authenticateToken);
 

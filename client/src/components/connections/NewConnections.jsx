@@ -52,7 +52,11 @@ const NewConnections = ({ loading, suggestions }) => {
                         <Typography variant="subtitle2" color="GrayText">
                           <Stack direction="row" alignItems={"center"}>
                             <People sx={{ mr: "5px" }} />
-                            {`${connection.connections.length} connections`}
+                            {`${connection.connections.length} ${
+                              connection.connections.length === 1
+                                ? "connection"
+                                : "connections"
+                            }`}
                           </Stack>
                         </Typography>
                         <Stack direction="row" alignItems="center">

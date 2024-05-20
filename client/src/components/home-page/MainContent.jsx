@@ -16,7 +16,7 @@ import DatePosted from "./DatePosted";
 import Comments from "./Comments";
 import PostHeader from "./PostHeader";
 import useLikePost, { useCommentPost } from "../../hooks/use-like-post";
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../hooks/AppContext";
 
 const MainContent = ({ posts, loading, user }) => {
@@ -26,9 +26,12 @@ const MainContent = ({ posts, loading, user }) => {
   const { optimisticUpdate } = useContext(AppContext);
 
   const likePost = async (post) => {
-    const { response } = await useLikePost(post);
+    const { response } = await useLikePost(
+      `http://localhost:5000/posts/${post._id}/like`,
+      post
+    );
     if (response?.data) {
-      optimisticUpdate({ post: response?.data });
+      optimisticUpdate({ post: response?.data, postType: "post" });
       setIsLiked((prevIsLiked) => ({
         ...prevIsLiked,
         [post._id]: true,
@@ -44,16 +47,29 @@ const MainContent = ({ posts, loading, user }) => {
     };
 
     if (comment.length !== 0) {
-      const { response } = await useCommentPost(postId, commentData);
+      const { response } = await useCommentPost(
+        `http://localhost:5000/posts/${postId}/comment`,
+        commentData
+      );
       if (response?.data) {
-        optimisticUpdate({ post: response?.data });
+        optimisticUpdate({ post: response?.data, postType: "post" });
       }
     }
     setComment("");
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        Loading Posts...
+      </div>
+    );
   }
   return (
     <Stack>
@@ -80,11 +96,20 @@ const MainContent = ({ posts, loading, user }) => {
                 >
                   {post?.media && (
                     <CardContent sx={{ maxWidth: "700px", maxHeight: "500px" }}>
-                      <img
-                        src={post?.media}
-                        alt="Couldn't load image"
-                        width="700px"
-                      />
+                      {post.media.split("/")[0].split(":")[1] === "image" ? (
+                        <img
+                          src={post.media}
+                          alt="uploaded image"
+                          style={{ maxHeight: "400px", maxWidth: "700px" }}
+                        />
+                      ) : (
+                        <video
+                          controls
+                          src={post.media}
+                          alt="uploaded video"
+                          style={{ maxHeight: "400px", maxWidth: "700px" }}
+                        />
+                      )}
                     </CardContent>
                   )}
                 </Card>
@@ -143,7 +168,7 @@ const MainContent = ({ posts, loading, user }) => {
                           <Button
                             onClick={() => commentPost(post._id, user, comment)}
                           >
-                            ADD
+                            SEND
                           </Button>
                         ),
                       }}

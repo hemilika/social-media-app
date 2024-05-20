@@ -1,88 +1,96 @@
 import {
-  Avatar,
   Button,
   Card,
-  InputAdornment,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Select,
   Stack,
   TextField,
-  Typography,
-  styled,
 } from "@mui/material";
-import { PermMedia } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
+import AddMedia from "../AddMedia";
+import useGetForumNames from "../../hooks/use-get-forum-names";
+import useAddForumPost from "../../hooks/use-add-forum-post";
+import { AppContext } from "../../hooks/AppContext";
 
 const AddForumPost = ({ user }) => {
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [forumPosted, setForumPosted] = useState("");
+
+  const { optimisticUpdate } = useContext(AppContext);
+
+  const { forums, loading } = useGetForumNames(
+    "http://localhost:5000/forum/names"
+  );
 
   const { register, handleSubmit, reset } = useForm();
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleSelectForumChange = (event) => {
+    setForumPosted(event.target.value);
   };
 
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
+  const handleAddForumPost = async (formData) => {
+    const currentDate = new Date(Date.now())
+      .toISOString()
+      .replace("Z", "+00:00");
+    const postData = {
+      description: formData.description,
+      posterUsername: user.username,
+      media: uploadedImage,
+      datePosted: currentDate,
+      forumPosted: forumPosted,
+    };
+    const { response } = await useAddForumPost(postData);
+    optimisticUpdate({ post: response?.data, postType: "forum" });
+    reset({ description: "" });
+    setUploadedImage(null);
+    setForumPosted("");
+  };
 
-  //   const handleAddPost = async (formData) => {
-  //     const currentDate = new Date(Date.now())
-  //       .toISOString()
-  //       .replace("Z", "+00:00");
-  //     const postData = {
-  //       description: formData.description,
-  //       posterUsername: user.username,
-  //       profilePicture: user.profilePicture,
-  //       media: uploadedImage,
-  //       datePosted: currentDate,
-  //     };
-  //     const { response } = await useAddPost(postData);
-  //     if (response?.data) {
-  //       optimisticUpdate({ post: response?.data });
-  //     }
-  //     reset({ description: "" });
-  //     setUploadedImage(null);
-  //   };
+  const isImage = uploadedImage?.startsWith("data:image");
+
+  if (loading) return <p>Loading Forums...</p>;
   return (
     <>
       <Card sx={{ mt: "10px", padding: "10px" }}>
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack direction="row" spacing={1}>
           <TextField
+            multiline
+            sx={{ width: "70%" }}
             {...register("description", { required: true })}
             placeholder="Post on a forum..."
             autoComplete="off"
           />
-          <Select />
-          <Button>POST</Button>
-        </Stack>
-        <Stack direction="row" justifyContent="space-evenly">
-          <Button startIcon={<PermMedia />} component="label">
-            <Typography variant="button" color="black" fontFamily="unset">
-              Media
-            </Typography>
-            <VisuallyHiddenInput
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
+
+          <FormControl sx={{ width: "30%" }}>
+            <InputLabel id="demo-simple-select-label">Forum</InputLabel>
+            <Select
+              value={forumPosted}
+              label="Forum"
+              onChange={(e) => handleSelectForumChange(e)}
+            >
+              {forums.map((forum) => {
+                return (
+                  <MenuItem key={forum._id} value={forum.forumName}>
+                    {forum.forumName}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <Button
+            onClick={handleSubmit(handleAddForumPost)}
+            variant="contained"
+          >
+            POST
           </Button>
         </Stack>
+        <Stack mt="10px" alignItems={"center"}>
+          <AddMedia setUploadedImage={setUploadedImage} />
+        </Stack>
+        <Stack direction="row" justifyContent="space-evenly"></Stack>
         {uploadedImage ? (
           <Stack
             padding={"20px"}
@@ -92,7 +100,20 @@ const AddForumPost = ({ user }) => {
             maxHeight={"400px"}
             maxWidth={"800px"}
           >
-            <img src={uploadedImage} alt="uploaded image" />
+            {isImage ? (
+              <img
+                src={uploadedImage}
+                alt="uploaded image"
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            ) : (
+              <video
+                src={uploadedImage}
+                alt="uploaded video"
+                controls
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            )}
           </Stack>
         ) : null}
       </Card>

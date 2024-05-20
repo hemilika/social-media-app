@@ -1,9 +1,16 @@
-const { getForums } = require("../../models/forums/forums.model");
+const {
+  getForums,
+  getForumNames,
+} = require("../../models/forums/forums.model");
 const Forums = require("../../models/forums/forums.mongo");
 
 const getAllForums = async (req, res) => {
   const forums = await getForums();
   res.status(200).json(forums);
+};
+const getAllForumNames = async (req, res) => {
+  const forumNames = await getForumNames();
+  res.status(200).json(forumNames);
 };
 
 const createForum = async (req, res) => {
@@ -21,4 +28,4 @@ const createForum = async (req, res) => {
     return res.status(404).json(err);
   }
 };
-module.exports = { getAllForums, createForum };
+module.exports = { getAllForums, createForum, getAllForumNames };

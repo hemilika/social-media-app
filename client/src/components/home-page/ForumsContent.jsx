@@ -3,6 +3,7 @@ import { Button, Card, CardHeader, Stack, Typography } from "@mui/material";
 import { ArrowRightAlt, Visibility } from "@mui/icons-material";
 import useGetData from "../../hooks/use-get-data";
 import { useLocation, useNavigate } from "react-router-dom";
+import LoadingForums from "../loading-animations/LoadingForums";
 
 const ForumsContent = () => {
   const { data: forums, loading } = useGetData("http://localhost:5000/forums");
@@ -10,18 +11,17 @@ const ForumsContent = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  if (loading) return <div>Loading Forums...</div>;
+  if (loading) return <LoadingForums />;
 
   return (
-    <Stack alignItems="center">
+    <Stack alignItems="center" minWidth="200px" maxWidth="250px">
       <Card>
         <Typography variant="subtitle1" sx={{ ml: "25%" }}>
           Explore Forums
         </Typography>
         {forums.map((forum, index) => {
-          console.log(forum?.technologies);
           return (
-            <Card sx={{ borderRadius: "0", minWidth: "200px" }} key={index}>
+            <Card sx={{ borderRadius: "0" }} key={index}>
               <CardHeader
                 title={forum.forumName}
                 subheader={forum.forumDescription}
@@ -49,7 +49,12 @@ const ForumsContent = () => {
                 justifyContent="center"
                 marginBottom="5px"
               >
-                <Button endIcon={<Visibility />}>View </Button>
+                <Button
+                  endIcon={<Visibility />}
+                  onClick={() => navigate(`/forums/${forum.forumName}`)}
+                >
+                  View{" "}
+                </Button>
               </Stack>
             </Card>
           );

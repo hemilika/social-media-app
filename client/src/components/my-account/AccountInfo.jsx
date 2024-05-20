@@ -6,8 +6,15 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import AddMedia from "../AddMedia";
 
-const AccountInfo = ({ reset, user, register }) => {
+const AccountInfo = ({
+  uploadedImage,
+  setUploadedImage,
+  reset,
+  user,
+  register,
+}) => {
   return (
     <Stack spacing={1}>
       <Typography variant="h6">Account</Typography>
@@ -19,16 +26,18 @@ const AccountInfo = ({ reset, user, register }) => {
         <Stack direction="row" spacing={4} alignItems="center">
           <Avatar
             sx={{ width: "80px", height: "80px" }}
-            src={user?.profilePicture}
+            src={uploadedImage || user?.profilePicture}
           />
           <Stack>
             <Typography variant="h6">Profile Picture</Typography>
             <Typography variant="subtitle2" color="GrayText">
-              PNG,JPEG under 15MB
+              PNG,JPEG under 5 MB
             </Typography>
           </Stack>
         </Stack>
         <Stack direction="row" spacing={1} alignItems="center">
+          <AddMedia setUploadedImage={setUploadedImage} />
+          <p>or </p>
           <TextField
             label="Paste photo URL"
             {...register("profilePicture")}

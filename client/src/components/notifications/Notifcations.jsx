@@ -10,6 +10,8 @@ const Notifcations = ({ open, onClose, anchorEl }) => {
             key={notification.id}
             message={notification.message}
             time={notification.time}
+            user={notification.profilePicture}
+            read={notification.read}
           />
         );
       })}

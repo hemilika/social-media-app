@@ -1,4 +1,4 @@
-import { EventNote, Forum, PostAdd } from "@mui/icons-material";
+import { EventNote, FormatListNumbered, Forum } from "@mui/icons-material";
 import {
   Avatar,
   Button,
@@ -7,15 +7,14 @@ import {
   Stack,
   TextField,
   Typography,
-  styled,
 } from "@mui/material";
-import { PermMedia } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import useAddPost from "../../hooks/use-add-post";
 import { useContext, useState } from "react";
 import CreateForumDialog from "./CreateForumDialog";
 import { AppContext } from "../../hooks/AppContext";
 import { useNavigate } from "react-router-dom";
+import AddMedia from "../AddMedia";
 
 const AddPost = ({ user }) => {
   const [openForumCreate, setOpenForumCreate] = useState(false);
@@ -26,28 +25,6 @@ const AddPost = ({ user }) => {
   const { optimisticUpdate } = useContext(AppContext);
 
   const { register, handleSubmit, reset } = useForm();
-
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
 
   const handleAddPost = async (formData) => {
     const currentDate = new Date(Date.now())
@@ -62,11 +39,14 @@ const AddPost = ({ user }) => {
     };
     const { response } = await useAddPost(postData);
     if (response?.data) {
-      optimisticUpdate({ post: response?.data });
+      optimisticUpdate({ post: response?.data, postType: "post" });
     }
     reset({ description: "" });
     setUploadedImage(null);
   };
+
+  const isImage = uploadedImage?.startsWith("data:image");
+
   return (
     <>
       <Card sx={{ mt: "10px", padding: "10px" }}>
@@ -89,6 +69,7 @@ const AddPost = ({ user }) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment
+                  postition="end"
                   variant="filled"
                   sx={{ cursor: "pointer" }}
                   onClick={handleSubmit(handleAddPost)}
@@ -100,16 +81,7 @@ const AddPost = ({ user }) => {
           />
         </Stack>
         <Stack direction="row" justifyContent="space-evenly">
-          <Button startIcon={<PermMedia />} component="label">
-            <Typography variant="button" color="black" fontFamily="unset">
-              Media
-            </Typography>
-            <VisuallyHiddenInput
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </Button>
+          <AddMedia setUploadedImage={setUploadedImage} />
           <Button
             startIcon={<Forum />}
             onClick={() => setOpenForumCreate(true)}
@@ -133,7 +105,20 @@ const AddPost = ({ user }) => {
             maxHeight={"400px"}
             maxWidth={"800px"}
           >
-            <img src={uploadedImage} alt="uploaded image" />
+            {isImage ? (
+              <img
+                src={uploadedImage}
+                alt="uploaded image"
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            ) : (
+              <video
+                controls
+                src={uploadedImage}
+                alt="uploaded video"
+                style={{ maxHeight: "400px", maxWidth: "700px" }}
+              />
+            )}
           </Stack>
         ) : null}
       </Card>

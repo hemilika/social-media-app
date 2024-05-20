@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const useDeletePost = async (id) => {
+const useDeletePost = async (endpoint) => {
   try {
-    const response = await axios.delete(`http://localhost:5000/posts/${id}`, {
+    const response = await axios.delete(endpoint, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

@@ -25,12 +25,11 @@ const SignUpForm = () => {
   const navigate = useNavigate();
 
   const handleSignUp = async (formData) => {
-    const { response, error } = await useRegister(formData);
+    const { response } = await useRegister(formData);
     if (response.status === 201) {
       navigate("/login");
-    }
-    if (error) {
-      setRegisterError("A problem has occurred, please try again");
+    } else {
+      setRegisterError("An error occurred, please try again");
     }
   };
   return (
@@ -58,7 +57,7 @@ const SignUpForm = () => {
             fullWidth
             label="Full Name"
             autoFocus
-            error={errors?.fullName || registerError}
+            error={!!errors?.fullName || !!registerError}
             helperText={errors?.fullName?.message || registerError}
           />
           <TextField
@@ -68,7 +67,7 @@ const SignUpForm = () => {
             fullWidth
             label="Email address"
             autoFocus
-            error={errors?.email}
+            error={!!errors?.email}
             helperText={errors?.email?.message}
           />
           <TextField
@@ -76,7 +75,7 @@ const SignUpForm = () => {
             fullWidth
             label="Username"
             {...register("username", { required: "Enter a username" })}
-            error={errors?.username}
+            error={!!errors?.username}
             helperText={errors?.username?.message}
           />
           <TextField
@@ -85,7 +84,7 @@ const SignUpForm = () => {
             fullWidth
             label="Password"
             type="password"
-            error={errors?.password}
+            error={!!errors?.password}
             helperText={errors?.password?.message}
           />
           <Button

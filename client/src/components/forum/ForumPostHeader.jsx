@@ -1,25 +1,27 @@
-import { Delete } from "@mui/icons-material";
 import { Button, Stack, Typography } from "@mui/material";
-import useDeletePost from "../../hooks/use-delete-post";
-import DeletePostDialog from "./DeletePostDialog";
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { AppContext } from "../../hooks/AppContext";
+import useDeletePost from "../../hooks/use-delete-post";
+import DeletePostDialog from "../home-page/DeletePostDialog";
+import { Delete } from "@mui/icons-material";
 
-const PostHeader = ({ post, user }) => {
+const ForumPostHeader = ({ forumPost, user }) => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const { optimisticUpdate } = useContext(AppContext);
+
   const handleDeletePost = () => {
-    useDeletePost(`http://localhost:5000/posts/${post._id}`);
+    useDeletePost(`http://localhost:5000/forum-posts/${forumPost._id}/delete`);
     setOpenDeleteDialog(false);
-    optimisticUpdate({ id: post._id, isDeleted: true, postType: "post" });
+    optimisticUpdate({ id: forumPost._id, isDeleted: true, postType: "forum" });
   };
+
   return (
     <Stack direction="row" justifyContent="space-between">
       <Typography variant="subtitle2" fontWeight="bold" sx={{ mt: "2px" }}>
-        {post?.posterUsername}
+        {forumPost.forumPosted}
       </Typography>
-      {post?.posterUsername === user ? (
+      {forumPost?.posterUsername === user?.username ? (
         <Button
           onClick={() => setOpenDeleteDialog(true)}
           size="small"
@@ -37,4 +39,4 @@ const PostHeader = ({ post, user }) => {
   );
 };
 
-export default PostHeader;
+export default ForumPostHeader;

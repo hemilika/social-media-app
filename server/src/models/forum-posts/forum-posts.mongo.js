@@ -25,9 +25,9 @@ const forumPostsSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  profilePicture: {
+  forumPosted: {
     type: String,
-    required: false,
+    required: true,
   },
 });
 
