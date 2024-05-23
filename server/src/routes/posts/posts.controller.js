@@ -2,7 +2,7 @@ const { getPosts } = require("../../models/posts/posts.model");
 const Posts = require("../../models/posts/posts.mongo");
 
 const getAllPosts = async (req, res) => {
-  const posts = await getPosts();
+  const posts = await getPosts(req.query.search);
   return res.status(200).json(posts);
 };
 

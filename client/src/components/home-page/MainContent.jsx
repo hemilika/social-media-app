@@ -11,7 +11,6 @@ import {
   TextField,
 } from "@mui/material";
 import { Comment, Favorite, Textsms } from "@mui/icons-material";
-import LoadMore from "./LoadMore";
 import DatePosted from "./DatePosted";
 import Comments from "./Comments";
 import PostHeader from "./PostHeader";
@@ -185,7 +184,6 @@ const MainContent = ({ posts, loading, user }) => {
           </Card>
         );
       })}
-      <LoadMore />
     </Stack>
   );
 };

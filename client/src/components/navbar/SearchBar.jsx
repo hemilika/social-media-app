@@ -32,6 +32,7 @@ const SearchBar = () => {
   return (
     <TextField
       value={searchBarValue}
+      type="search"
       placeholder={getPlaceholderValue()}
       onChange={(e) => setSearchBarValue(e.target.value)}
       InputProps={{

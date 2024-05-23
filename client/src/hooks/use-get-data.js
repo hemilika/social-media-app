@@ -1,16 +1,19 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { AppContext } from "./AppContext";
 
-const useGetData = (endpoint, search) => {
+const useGetData = (endpoint) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { searchValue } = useContext(AppContext);
 
   const headerToken = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     params: {
-      search: search,
+      search: searchValue,
     },
   };
   const fetchData = async () => {
@@ -25,7 +28,7 @@ const useGetData = (endpoint, search) => {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchValue]);
 
   return { data, loading };
 };

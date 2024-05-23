@@ -53,16 +53,27 @@ const OtherInformation = ({ user, register, setValue }) => {
             defaultValue={user.degree}
           />
         </Stack>
-        <Autocomplete
-          {...register("interests")}
-          multiple
-          disablePortal
-          options={interests}
-          value={selectedInterests}
-          onChange={handleInterestsChange}
-          sx={{ width: 300 }}
-          renderInput={(params) => <TextField {...params} label="Interests" />}
-        />
+        <Stack direction="row" justifyContent="space-between">
+          <TextField
+            {...register("age")}
+            label="Age"
+            type="number"
+            sx={{ width: "500px" }}
+            defaultValue={user.age}
+          />
+          <Autocomplete
+            {...register("interests")}
+            multiple
+            disablePortal
+            options={interests}
+            value={selectedInterests}
+            onChange={handleInterestsChange}
+            sx={{ width: 500 }}
+            renderInput={(params) => (
+              <TextField {...params} label="Interests" />
+            )}
+          />
+        </Stack>
       </Stack>
     </>
   );

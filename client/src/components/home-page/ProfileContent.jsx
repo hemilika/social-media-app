@@ -92,9 +92,9 @@ const ProfileContent = ({ user, loading }) => {
           <Stack spacing={1}>
             <Stack justifyContent="space-between" direction="row" spacing={5}>
               <Typography variant="body2" color="text.secondary">
-                Job Field
+                Age
               </Typography>
-              <Typography variant="body2">{user.jobField}</Typography>
+              <Typography variant="body2">{`${user.age} years old`}</Typography>
             </Stack>
             <Stack justifyContent="space-between" direction="row" spacing={5}>
               <Typography variant="body2" color="text.secondary">

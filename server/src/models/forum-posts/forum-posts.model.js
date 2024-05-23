@@ -1,10 +1,12 @@
 const forumPosts = require("./forum-posts.mongo");
 
-const getForumPosts = async (forumName) => {
-  const forumNameQuery = forumName ? { forumPosted: forumName } : {};
+const getForumPosts = async (search) => {
+  const searchQuery = search
+    ? { forumPosted: { $regex: search, $options: "i" } }
+    : {};
   try {
     const allPosts = await forumPosts
-      .find(forumNameQuery)
+      .find(searchQuery)
       .sort({ datePosted: -1 })
       .exec();
     return allPosts;

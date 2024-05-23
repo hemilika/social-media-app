@@ -54,6 +54,10 @@ const usersSchema = new mongoose.Schema({
     type: [Object],
     required: false,
   },
+  age: {
+    type: Number,
+    required: false,
+  },
 });
 
 module.exports = mongoose.model("users", usersSchema);

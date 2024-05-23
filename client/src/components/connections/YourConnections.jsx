@@ -45,13 +45,6 @@ const YourConnections = ({ connections }) => {
           })}
         </Stack>
       )}
-      {connections.length === 0 ? (
-        ""
-      ) : (
-        <Stack paddingTop="10px">
-          <Button endIcon={<ArrowDownward />}>Show More</Button>
-        </Stack>
-      )}
     </Stack>
   );
 };

@@ -122,9 +122,6 @@ const NewConnections = ({ loading, suggestions }) => {
           );
         })}
       </Grid>
-      <Button endIcon={<ArrowDownward />} sx={{ mt: "10px" }}>
-        Show More
-      </Button>
     </>
   );
 };
